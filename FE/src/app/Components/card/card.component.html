@@ -1,0 +1,35 @@
+<!-- <div *ngIf="isLoading">Loading...</div>
+
+<div *ngIf="!isLoading && productsData.length > 0" class="row">
+  <div *ngFor="let product of productsData" class="col-12 col-md-4 mb-4">
+    <div class="productCard">
+      <div style="height:10em;">
+        <img class="card-img-top" [src]="product.img_link" alt="{{ product.product_name }} image"
+          style="border-bottom: 1px solid #ddd; width: 100%; height: 100%;">
+      </div>
+
+      <div>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="card-title font-weight-bold">{{ product.product_name }}</span>
+          <span class="card-price text-success">RS: {{ product.actual_price }} /-</span>
+        </div>
+        <p class="card-text text-muted" style="min-height: 60px;">{{ product.aboutProduct }}</p>
+        <a [href]="product.productLink" class="btn btn-primary w-100">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isLoading && productsData.length === 0">
+  No products available.
+</div>
+ -->
+{{product | json}}
+ <div class="card product-card">
+  <img [src]="product.img_link" alt="{{ product.product_name }}" class="card-img-top" />
+  <div class="card-body text-center">
+    <h5 class="card-title">{{ product.product_name }}</h5>
+    <p class="card-text text-muted">{{ product.actual_price }}</p>
+    <button class="btn btn-primary">Add to Cart</button>
+  </div>
+</div>
