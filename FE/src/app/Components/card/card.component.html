@@ -1,0 +1,14 @@
+<mat-card class="product-card">
+    <div class="image-container">
+      <img [src]="product?.img_link" [alt]="product?.product_name" />
+    </div>
+    <mat-card-content>
+      <h3>{{ product?.product_name }}</h3>
+      <button mat-icon-button (click)="toggleWishlist()">
+        <mat-icon [ngClass]="{ 'wishlist-active': isWishlisted }">
+          {{ isWishlisted ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+      </button>
+    </mat-card-content>
+  </mat-card>
+  

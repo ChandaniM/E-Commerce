@@ -1,0 +1,111 @@
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+
+  .image-section {
+    flex: 1;
+    width: 50%;
+    display: flex;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  }
+
+  .form-section {
+    flex: 2;
+    min-width: 300px;
+    max-width: 600px;
+    margin: 0 auto;
+
+    mat-card {
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      h2 {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+
+      p {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        color: #757575;
+      }
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .name-fields,
+    .country-place,
+    .dob-role {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: auto auto;
+    }
+
+    .date-picker-container {
+      width: 48%;
+
+      label {
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    }
+
+        .signup {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section {
+    flex: 0;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .name-fields,
+  .country-place,
+  .dob-role {
+    flex-direction: column;
+  }
+
+  .half-width {
+    width: 100%;
+    margin-right: 0;
+  }
+}

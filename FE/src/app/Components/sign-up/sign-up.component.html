@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="image-section">
+    <img src="/assets/images/sign-up.jpg" alt="Characters" />
+  </div>
+
+  <div class="form-section">
+    <mat-card>
+      <h2>Signup</h2>
+      <p>Create your new account</p>
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <!-- First Name and Last Name (Side by Side) -->
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter your first name"
+              formControlName="first_name"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter your last name"
+              formControlName="last_name"
+            />
+          </mat-form-field>
+        </div>
+        <!-- Username -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="Enter your username"
+            formControlName="username"
+          />
+        </mat-form-field>
+
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="Enter your email"
+            formControlName="email"
+          />
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="Enter your password"
+            formControlName="password"
+          />
+        </mat-form-field>
+
+        <!-- Phone Number -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            placeholder="Enter your phone number"
+            formControlName="phone_number"
+          />
+        </mat-form-field>
+
+        <!-- Country and Place (Side by Side) -->
+        <div class="country-place" *ngIf="isHidden">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Country</mat-label>
+            <input
+              matInput
+              placeholder="Enter your country"
+              formControlName="country"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Place</mat-label>
+            <input
+              matInput
+              placeholder="Enter your place"
+              formControlName="place"
+            />
+          </mat-form-field>
+        </div>
+
+        <!-- Address -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            placeholder="Enter your address"
+            formControlName="address"
+          />
+        </mat-form-field>
+
+        <!-- Postal Code -->
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          *ngIf="isHidden"
+        >
+          <mat-label>Postal Code</mat-label>
+          <input
+            matInput
+            placeholder="Enter your postal code"
+            formControlName="postal_code"
+          />
+        </mat-form-field>
+
+        <!-- Date of Birth and Role (Side by Side) -->
+        <div class="dob-role">
+          <!-- Date of Birth (No Material Design for Date Picker) -->
+          <div class="date-picker-container" *ngIf="isHidden">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" formControlName="date_of_birth" />
+          </div>
+        </div>
+        <!-- Role -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Role</mat-label>
+          <select matNativeControl formControlName="role">
+            <option value="customer">Customer</option>
+            <option value="admin">Admin</option>
+            <!-- Add more roles as needed -->
+          </select>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <button
+            class="signup"
+          type="submit"
+          [disabled]="!userForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>
