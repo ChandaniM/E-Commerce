@@ -1,0 +1,24 @@
+<!-- cart.component.html -->
+<div class="cart-container">
+    <h2>Your Cart</h2>
+  
+    <mat-list *ngIf="cartItems.length > 0; else emptyCart">
+      <mat-list-item *ngFor="let item of cartItems">
+        <div class="cart-item">
+          <div class="item-details">
+            <p><strong>{{ item.product_name }}</strong></p>
+            <p>Price: ₹{{ item.actual_price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+          </div>
+          <button mat-button (click)="removeItem(item.id)">Remove</button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  
+    <ng-template #emptyCart>
+      <p>Your cart is empty.</p>
+    </ng-template>
+  
+    <button mat-raised-button color="warn" (click)="clearCart()">Clear Cart</button>
+  </div>
+  

@@ -1,0 +1,53 @@
+<div class="product-detail-container">
+  <!-- Left Section: Image Gallery -->
+  <div class="image-gallery">
+    <img [src]="product?.img_link" alt="{{ product?.product_name }}" class="main-image" />
+  </div>
+
+  <!-- Right Section: Product Information -->
+  <div class="product-info">
+    <h1>{{product?.product_name}}</h1>
+    <p class="price">
+      <span class="old-price">${{ product?.actual_price }}</span>
+      <span class="current-price">${{ product?.discounted_price }}</span>
+    </p>
+    <div class="rating">
+      <span>{{ product?.rating }}</span>
+      <span>({{ product?.rating_count }} Reviews)</span>
+    </div>
+
+    <!-- Size Options -->
+    <div class="size-options">
+      <span>Select Size:</span>
+      <button *ngFor="let size of productSizes" mat-button>
+        {{ size }}
+      </button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="actions">
+      <button mat-stroked-button>Buy Now</button>
+      <button mat-stroked-button (click)="addToCart(product , quantity)">Add to Cart</button>
+
+      <!-- Quantity Input -->
+      <div class="quantity-control">
+        <button (click)="decreaseQuantity()" [disabled]="quantity <= 1">-</button>
+        <input type="number" id="quantity" [(ngModel)]="quantity" min="1" step="1" [max]="maxQuantity" required />
+        <button (click)="increaseQuantity()" [disabled]="quantity >= maxQuantity">+</button>
+      </div>
+    </div>
+
+    <!-- Tabs for Details -->
+    <mat-tab-group>
+      <mat-tab label="Detail">
+        <p>{{ product?.about_product }}</p>
+      </mat-tab>
+      <mat-tab label="category">
+        <p>{{ product?.category }}</p>
+      </mat-tab>
+      <mat-tab label="Reviews">
+        <p>{{ product?.review_content }}</p>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
