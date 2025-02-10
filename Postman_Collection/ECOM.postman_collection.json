@@ -177,6 +177,10 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Auth",
+			"item": []
 		}
 	]
 }
