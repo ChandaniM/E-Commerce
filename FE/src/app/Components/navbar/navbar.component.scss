@@ -1,0 +1,27 @@
+.navbar-logo {
+    img {
+      height: 40px;
+      object-fit: contain;
+    }
+  }
+  
+  .search-container {
+    display: flex;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 40%;
+  
+    input {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+  
+    button {
+      border: none;
+      background: transparent;
+      padding: 0 10px;
+    }
+  }
+  
