@@ -1,10 +1,10 @@
 @use 'bootstrap';
-@use '/styles/variables';
+@use '../public/styles/variables';
 @use 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 body{
-    border: 1px solid #f00;
+    border: 1px solid var( --product-primary);
     width: 100vw;
     height: 100vh;
     padding: 0;
