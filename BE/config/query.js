@@ -7,7 +7,7 @@ const addProduct = `INSERT INTO products(product_id,product_name,category,discou
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
 const productById = `SELECT * FROM products where product_id = ?;`;
 const deleteProduct = `DELETE FROM products WHERE product_id = ? ;`;
-
+const getuserProfile = `SELECT * FROM users WHERE id = ?;`;
 module.exports = {
   getListOfProduct,
   LOGIN_QUERY,
@@ -16,4 +16,5 @@ module.exports = {
   productById,
   deleteUserAccount,
   deleteProduct,
+  getuserProfile,
 };
