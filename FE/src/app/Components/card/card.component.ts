@@ -1,31 +1,11 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
-import { ProductsService } from 'src/app/Services/products.service';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'card',
+  selector: 'app-card',
+  imports: [],
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrl: './card.component.scss'
 })
-export class CardComponent{
-  
-  constructor(private router:Router ,  private productService: ProductsService){
+export class CardComponent {
 
-  }
-
-  @Input() product: Product | null = null;
-  isWishlisted = false;
-
-  toggleWishlist(product:any) {
-    this.isWishlisted = !this.isWishlisted;
-  }
-
-  cardDetailsPage(product:Product) {
-    let id  = product?.product_id;
-    this.productService.productDetail.next(product);
-    this.productService.productDetails(product)
-    this.router.navigate(['/product'], { queryParams: { result: id } });
-  }
-  
 }

@@ -1,15 +1,1 @@
-<mat-card *ngIf="product" class="product-card" (click)="cardDetailsPage(product)">
-  {{product?.product_id}}
-    <div class="image-container">
-      <img [src]="product?.img_link" [alt]="product?.product_name" />
-    </div>
-    <mat-card-content>
-      <h3>{{ product?.product_name }}</h3>
-      <button mat-icon-button (click)="toggleWishlist(product)">
-        <mat-icon [ngClass]="{ 'wishlist-active': isWishlisted }">
-          {{ isWishlisted ? 'favorite' : 'favorite_border' }}
-        </mat-icon>
-      </button>
-    </mat-card-content>
-  </mat-card>
-  
+<p>card works!</p>
