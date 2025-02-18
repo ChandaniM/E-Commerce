@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<div>
+    <carousel></carousel>
+    <div class="product-list">
+      <card *ngFor="let product of products" [product]="product"></card>
+    </div>  
+</div>
