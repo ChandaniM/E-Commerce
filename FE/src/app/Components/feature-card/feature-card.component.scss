@@ -1,0 +1,30 @@
+.gradient {
+    padding: 16px;
+    background: linear-gradient(to bottom, #FFDAB9, #FFFFFF);
+    border-radius: 5px;
+    min-width: 200px;
+    text-align: center;
+
+    .bg-w-card {
+        background-color: #FFFFFF;
+        border-radius: 5px;
+        padding: 16px;
+        position: relative; // Ensures absolute positioning for .tag
+
+        .icon {
+            width: 50px;
+        }
+
+        .tag {
+            padding: 2px 8px;
+            position: absolute;
+            top: 0px; // Adjusted for better spacing
+            right: 1px;
+            background: #5caf90;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 0 5px 0 5px;
+        }
+    }
+}

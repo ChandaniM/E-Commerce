@@ -1,6 +1,42 @@
-.footer{
-    text-align: center;
-    padding: 8px;
-    background-color: var(--text-color);
-    color: var(--text-color-white);
-}
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centers the content horizontally
+    justify-content: center; // Centers the content vertically
+  
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: center; // Vertically centers the logo and text
+  
+      .logo {
+        img {
+          max-width: 150px;
+        }
+      }
+  
+      .content {
+        margin-left: 20px;
+  
+        h1 {
+          font-size: 2rem;
+          margin: 0;
+        }
+  
+        p {
+          font-size: 1rem;
+          color: #666;
+        }
+      }
+    }
+  
+    .footer {
+        width: 100%;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #aaa;
+      padding: 8px;
+      background-color: var(--background-color-black);
+    }
+  }
+  

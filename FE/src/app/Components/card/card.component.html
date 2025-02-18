@@ -8,9 +8,9 @@
   </div>
 
   <div class="product-info">
-    <h3 [ngClass]="{ 'text-center': product.features.titleAlignment === 'center' }">
+    <h4 [ngClass]="{ 'text-center': product.features.titleAlignment === 'center' }">
       {{ product.name }}
-    </h3>
+    </h4>
     <p>{{ product.description }}</p>
 
     <div *ngIf="product.rating > 0" class="rating">

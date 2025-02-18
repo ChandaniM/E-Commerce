@@ -1,5 +1,8 @@
-<div>
+<div style="height:70%; overflow-y: scroll;">
     <carousel></carousel>
+    <div class="flex-item">
+      <feature-card *ngFor="let feature of categoryProduct" [feature]="feature"></feature-card>
+    </div>
     <div class="product-list">
       <card *ngFor="let product of products" [product]="product"></card>
     </div>  

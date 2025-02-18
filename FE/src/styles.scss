@@ -4,9 +4,15 @@
 
 
 body{
-    border: 1px solid var( --product-primary);
     width: 100vw;
     height: 100vh;
     padding: 0;
+    overflow: hidden;
     margin: 0;
+}
+.root{
+    display: block;
+    width: 100vw;
+    overflow: hidden;
+    height: 100vh;
 }
