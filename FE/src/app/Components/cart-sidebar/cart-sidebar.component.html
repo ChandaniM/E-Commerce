@@ -1,0 +1,62 @@
+<div class="cart-sidebar" *ngIf="isOpen">
+    <div class="cart-header">
+      <h3>My Cart</h3>
+      <button class="close-btn" (click)="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items">
+      <div class="cart-item">
+        <img src="/images/orange-juice.png" alt="Fresh Lichi">
+        <div class="cart-item-details">
+          <h4>Fresh Lichi</h4>
+          <span class="span-cart">$25.00 x 1 kg</span>
+          <div class="quantity-control">
+            <button class="qty-btn">-</button>
+            <input type="text" value="1">
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+        <button class="remove-btn">&times;</button>
+      </div>
+  
+      <div class="cart-item">
+        <img src="/images/orange-juice.png" alt="Ginger - Organic">
+        <div class="cart-item-details">
+          <h4>Ginger - Organic</h4>
+          <span class="span-cart">$5.00 x 1250g</span>
+          <div class="quantity-control">
+            <button class="qty-btn">-</button>
+            <input type="text" value="1">
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+        <button class="remove-btn">&times;</button>
+      </div>
+  
+      <div class="cart-item">
+        <img src="/images/orange-juice.png" alt="Dates Value Pack">
+        <div class="cart-item-details">
+          <h4>Dates Value Pack</h4>
+          <span class="span-cart">$59.00 x 1 pack</span>
+          <div class="quantity-control">
+            <button class="qty-btn">-</button>
+            <input type="text" value="1">
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+        <button class="remove-btn">&times;</button>
+      </div>
+    </div>
+  
+    <div class="cart-footer">
+      <div class="cart-total">
+        <p>Sub-Total: <span>$300.00</span></p>
+        <p>VAT (20%): <span>$60.00</span></p>
+        <p class="total">Total: <span>$360.00</span></p>
+      </div>
+      <div class="cart-actions">
+        <button class="view-cart">View Cart</button>
+        <button class="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+  
