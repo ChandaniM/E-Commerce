@@ -1,6 +1,7 @@
 .footer-container {
     display: flex;
     flex-direction: column;
+    border-top: 0.5px solid var(--gray-400);
     align-items: center; // Centers the content horizontally
     justify-content: center; // Centers the content vertically
   

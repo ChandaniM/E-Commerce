@@ -1,0 +1,210 @@
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 70%;
+  overflow: hidden;
+
+  .image-wrapper {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-height: 100%; // Ensures image does not exceed the container
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      object-fit: contain; // Keeps original image aspect ratio
+    }
+  }
+
+  .product-details {
+    flex: 2;
+    min-width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; // Adds scroll if content overflows
+    max-height: 100%; // Ensures details fit within container
+
+    .product-basic-info {
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .rating {
+        font-size: 14px;
+        color: #ff9800;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: bold;
+
+        .old-price {
+          text-decoration: line-through;
+          color: #888;
+        }
+
+        .current-price {
+          color: #d32f2f;
+        }
+
+        .success-dark-text {
+          color: #4caf50;
+        }
+      }
+
+      .description {
+        font-size: 14px;
+        color: #555;
+        margin-top: 10px;
+        line-height: 1.5;
+      }
+
+      .features {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+        li {
+          position: relative;
+          padding-left: 20px;
+          font-size: 14px;
+          color: #333;
+
+          &::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-size: 14px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        background: #d32f2f;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+          background: #b71c1c;
+        }
+      }
+
+      .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        button {
+          background: #4caf50;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background 0.3s;
+
+          &:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+          }
+
+          &:hover:not(:disabled) {
+            background: #388e3c;
+          }
+        }
+
+        input {
+          width: 50px;
+          text-align: center;
+          font-size: 16px;
+          padding: 5px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+    height: auto !important; // Adjusts height for mobile screens
+  }
+
+  .image-wrapper {
+    width: 100%;
+    max-height: 300px; // Prevents large images on small screens
+  }
+
+  .product-details {
+    width: 100%;
+    overflow-y: auto; // Ensures scrolling if content is too long
+    max-height: 400px !important;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
+.review-form-title {
+  margin-top: 8px;
+}
+.review-item {
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  border-bottom: 1px solid #cdcdcd;
+}
+.review-form-data {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .form-submit-button {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #5caf90;
+    color: #fff;
+    text-align: center;
+    border: unset;
+    border-radius: 5px;
+    width: fit-content;
+  }
+}

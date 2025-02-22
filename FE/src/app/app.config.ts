@@ -3,12 +3,13 @@ import { provideRouter } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { routes } from './app.routes';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule, provideAnimationsAsync()
   ]
 };
