@@ -1,0 +1,24 @@
+.Register {
+  height: 70%;
+  width: 50%;
+  margin: 0 auto;
+  .form-container {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+    // Responsive Fixes
+  }
+  @media (max-width: 768px) {
+    .Register{
+      height: auto;
+      overflow-y: scroll;
+      width: 100%;
+    }
+  }

@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="login-container">
+    <div class="image-section">
+        <img src="/images/login.jpg" alt="Characters" />
+    </div>
+  
+    <div class="form-section">
+        <div class="logo">
+            <mat-icon>shopping_cart</mat-icon>
+            <span>Online Store</span>
+        </div>
+        <h2>Welcome Back</h2>
+        <p>Please login to your account</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+            <!-- Username Field -->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" formControlName="username" class="input-field" />
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-field">
+                    <input type="password" id="password" placeholder="Enter your password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" class="input" />
+                    <ng-container type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+                        <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <div class="signup">
+                <a (click)="goToSignUp()">Create Account ?</a>
+                <button type="submit" class="login-button" [disabled]="!loginForm.valid">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
