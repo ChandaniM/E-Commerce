@@ -1,0 +1,77 @@
+.wishlist-page{
+    height: 70vh;
+    width: 100%;
+    padding: 16px;
+
+    .wishlist-title{
+        text-align: center;
+       .product-title{
+           color: #4b5966;
+       }
+       .wishlist-title-wish{
+        color: #5caf90;
+       }
+      p{
+        margin: 15px 0 0 0;
+        font-size: 14px;
+        color: #777;
+        text-align: center;
+        line-height: 23px;
+      }
+        
+    }
+    .table-info{
+
+        border: 1px solid #4b5966;
+        border-radius: 5px;
+       .table-title{
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #4b5966;
+        button{
+            outline: none;
+            border: none;
+            background-color: #5caf90;
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            &:hover{
+                background-color: #4b5966;
+            }
+        }
+       } 
+       .table{
+        padding: 16px;
+        display: block;
+        max-height: 380px; /* Adjust height as needed */
+        overflow-y: auto; 
+
+        .wishlist-table-container{
+            width: 100%;
+
+            tr{
+                padding:16px;
+            }
+        }
+
+.table-info .table thead,
+.table-info .table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-info .table thead {
+    width: calc(100% - 1em); /* Adjust width to match scrollbar */
+}
+
+.table-info .table tbody {
+    display: block;
+    overflow-y: auto;
+    max-height: 250px; /* Adjust height to fit your design */
+}
+       }
+    }
+}
