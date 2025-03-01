@@ -16,4 +16,10 @@ export class CartSidebarComponent {
     this.isOpen = !this.isOpen;
     this.cdr.detectChanges();
   }
+  checkout(){
+
+  }
+  viewCart(){
+    
+  }
 }

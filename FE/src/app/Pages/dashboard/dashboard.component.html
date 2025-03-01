@@ -4,6 +4,10 @@
       <feature-card *ngFor="let feature of categoryProduct" [feature]="feature"></feature-card>
     </div>
     <div class="product-list">
-      <card *ngFor="let product of products" [product]="product"></card>
+      @for (product of products; track product.id) {
+        <card [product]="product"></card>
+        } @empty {
+        <li>We are sorry their might be some issue in system. We are unable to access the products</li>
+        }
     </div>  
 </div>

@@ -1,0 +1,18 @@
+<table  style="width: 100%; text-align: center;">
+  <thead>
+    <tr>
+      @for (head of header; track head) {
+        <th>{{ head }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (data of tableData; track data) {
+      <tr>
+        @for (head of header; track head) {
+          <td>{{ data[head] }}</td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

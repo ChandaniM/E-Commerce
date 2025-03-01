@@ -30,8 +30,11 @@
 
   .product-info {
     text-align: left;
-
-    h3 {
+    .text-link{
+      
+      cursor: pointer;
+    }
+    h4 {
       &.text-center {
         text-align: center;
       }

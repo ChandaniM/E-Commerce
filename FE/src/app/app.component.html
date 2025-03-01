@@ -1,3 +1,8 @@
-<navbar></navbar>
-<router-outlet></router-outlet>
-<footer></footer>
+@if (!isAdmin) {
+    <navbar></navbar>
+    <router-outlet></router-outlet>
+    <footer></footer>
+    }
+    @else{
+       <admin-dashborad></admin-dashborad>
+    }

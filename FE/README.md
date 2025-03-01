@@ -57,3 +57,61 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+  products =[
+    {
+      "name": "Multi Grain Combo Cookies",
+      "description": "Healthy and delicious multi-grain cookies.",
+      "price": 25,
+      "image": "/images/brandlogo.png",
+      "rating": 4.5,
+      "sale": true,
+      "grams": [],
+      "layout": "portrait",
+      "features": {
+        "cardWidth": null,
+        "button": { "show": false, "text": "" },
+        "gramsTags": false,
+        "input": { "show": false, "type": "" },
+        "titleAlignment": "left",
+        "buttonWrapper": "flex-row"
+      }
+    },
+    {
+      "name": "Multi Grain Combo Cookies",
+      "description": "Healthy and delicious multi-grain cookies.",
+      "price": 25,
+      "image": "/images/brandlogo.png",
+      "rating": 4.5,
+      "sale": true,
+      "grams": ["250g", "500g"],
+      "layout": "landscape",
+      "features": {
+        "cardWidth": "800px",
+        "button": { "show": true, "text": "Add To Cart" },
+        "gramsTags": true,
+        "input": { "show": true, "type": "number" },
+        "titleAlignment": "left",
+        "buttonWrapper": "flex-row"
+      }
+    },
+    {
+      "name": "Newsletter",
+      "description": "Subscribe to Masterkart for future updates.",
+      "price": 0,
+      "image": "/images/brandlogo.png",
+      "rating": 0,
+      "sale": false,
+      "grams": [],
+      "layout": "landscape",
+      "features": {
+        "cardWidth": null,
+        "button": { "show": true, "text": "Subscribe" },
+        "gramsTags": false,
+        "input": { "show": true, "type": "text" },
+        "titleAlignment": "center",
+        "buttonWrapper": "flex-column"
+      }
+    }
+  ]
+https://icons.getbootstrap.com/?q=cart#styling
