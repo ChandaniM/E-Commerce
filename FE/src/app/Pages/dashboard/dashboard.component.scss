@@ -28,3 +28,60 @@
     justify-content: center;
     padding: 16px 16px 32px 16px;
   }
+  .banner{
+    display: flex;
+    padding: 24px 24px 40px 24px;
+    align-items: center;
+    justify-content: center;
+  }
+  .gi-animated-banner{
+    width: 80%;
+    background-image: url('/images/banner_silder_image.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    height: 300px;
+  }
+  .gi-animated-banner .gi-bnr-detail {
+    height: 100%;
+    padding: 80px 100px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    text-align: right;
+    position: relative;
+}
+
+.gi-animated-banner .gi-bnr-detail a {
+  margin-top: 15px;
+  padding: 5px 10px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  z-index: 2;
+}
+
+.gi-btn-2 {
+  -webkit-transition: all 0.3sease-in-out;
+  transition: all 0.3sease-in-out;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #5caf90;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+}

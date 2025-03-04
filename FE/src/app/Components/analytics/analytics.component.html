@@ -1,3 +1,25 @@
-<div class="analytics-conatiner">
-    
-</div>
+<div class="dashboard">
+    <div class="overview">
+      <div class="chart revenue-overview">
+        <div class="card-header">
+          <h3>Revenue Overview</h3>
+          <div class="date-picker">Mar 1, 2025 - Mar 1, 2025</div>
+        </div>
+        <charts [chartConfig]="chartJson"></charts>
+      </div>
+  
+      <div class="chart campaigns">
+        <div class="card-header">
+          <h3>Campaigns</h3>
+          <div class="settings-icon">⚙️</div>
+        </div>
+        <charts [chartConfig]="chartJson"></charts>
+        <div class="campaign-details">
+          <div>Social <span class="green">94% ↑ 75k</span></div>
+          <div>Referral <span class="red">96% ↓ 54k</span></div>
+          <div>Organic <span class="green">72% ↑ 2.5k</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

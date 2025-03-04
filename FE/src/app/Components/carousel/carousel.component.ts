@@ -8,19 +8,40 @@ import { Component } from '@angular/core';
   styleUrl: './carousel.component.scss'
 })
 export class CarouselComponent {
-  slides = [
+  images = [
     { 
-      image: '/images/brandlogo.png', 
-      text: 'First Slide Caption'
+      image: '/images/banner_image_1.jpg', 
+      text: 'Organic & healthy vegetables'
     },
     { 
-      image: '/images/login.jpg', 
-      text: 'Second Slide Caption'
-    },
-    { 
-      image: '/images/sign-up.jpg', 
-      text: 'Third Slide Caption'
+      image: '/images/banner_image_2.jpg', 
+      text: 'Explore fresh & juicy fruits'
     }
   ];
+
+  currentImage = 0;
+  interval: any;
+
+  constructor() {
+    this.startCarousel();
+  }
+
+  startCarousel() {
+    this.interval = setInterval(() => {
+      this.nextImage();
+    }, 5000); 
+  }
+
+  nextImage() {
+    this.currentImage = (this.currentImage + 1) % this.images.length;
+  }
+
+  prevImage() {
+    this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
+  }
+
+  goToImage(index: number) {
+    this.currentImage = index;
+  }
 
 }

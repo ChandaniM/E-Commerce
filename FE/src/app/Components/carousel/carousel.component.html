@@ -1,1 +1,28 @@
-<p>carousel works!</p>
+<div class="carousel">
+  <div class="slide">
+    <img [src]="images[currentImage].image" alt="Image">
+    <div class="text">{{ images[currentImage].text }}</div>
+    <button class="shop-btn">
+      Shop Now 
+      <i class="bi bi-chevron-double-right"></i>
+    </button>
+  </div>
+
+  <!-- Left Arrow -->
+  <button class="arrow left" (click)="prevImage()">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+
+  <!-- Right Arrow -->
+  <button class="arrow right" (click)="nextImage()">
+    <i class="bi bi-chevron-right"></i>
+  </button>
+
+  <!-- Dots -->
+  <div class="dots">
+    <span *ngFor="let img of images; let i = index" 
+          [class.active]="currentImage === i" 
+          (click)="goToImage(i)">
+    </span>
+  </div>
+</div>

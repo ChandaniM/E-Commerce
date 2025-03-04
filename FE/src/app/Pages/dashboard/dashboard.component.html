@@ -3,6 +3,18 @@
     <div class="flex-item">
       <feature-card *ngFor="let feature of categoryProduct" [feature]="feature"></feature-card>
     </div>
+    <div class="banner">
+      <div class="gi-animated-banner" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="200">
+        <h2 class="d-none">Offers</h2>
+        <div class="gi-bnr-detail">
+            <div class="gi-bnr-info">
+                <h2>Fresh Fruits <br>Healthy Products</h2>
+                <h3>30% off sale <span>Hurry up!!!</span></h3>
+                <a href="shop-left-sidebar-col-3.html" class="gi-btn-2">Shop now</a>
+            </div>
+        </div>
+    </div>
+    </div>
     <div class="product-list">
       @for (product of products; track product.id) {
         <card [product]="product"></card>

@@ -30,9 +30,16 @@ export const routes: Routes = [
     },
     {
         path:"cart",
-        loadComponent :  () => { return import('./Pages/cart/cart.component').then(m=>m.CartComponent)}    },
+        loadComponent :  () => { return import('./Pages/cart/cart.component').then(m=>m.CartComponent)}  
+    },
     {
         path :"Wishlist",
         loadComponent :  () => { return import('./Pages/wishlist/wishlist.component').then(m=>m.WishlistComponent)}
+    },
+    {
+        path : "user-profile",
+        loadComponent  :()=> { return import('./Components/user-profile/user-profile.component').then(m=>m.UserProfileComponent)},
+        data: { isAdmin: true }
+
     }
 ];

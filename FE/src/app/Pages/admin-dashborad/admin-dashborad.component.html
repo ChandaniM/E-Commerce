@@ -50,12 +50,22 @@
                         <i class="bi bi-moon-stars-fill"></i>
                     }
                   </span>
-                <div class="profile">
+                <div class="profile" (click)="toggleProfileDropdown()">
                     <img src="/images/admin.jpg" alt="">
+                    @if(dropdownProfileVisible){
+                        <div class="dropdown">
+                            <ul>
+                              <li (click)="showComponent('user-profile')">View Profile</li>
+                            </ul>
+                          </div>
+                    }
                 </div>
             </div>
         </div>
         <div class="dashboard-elements" [ngClass]="{'dark-theme-dashboard': themeModeBol, 'lightTheme': !themeModeBol}">
+            <ng-template [ngIf]="selectedComponent == 'user-profile'">
+                <user-profile></user-profile>
+              </ng-template>
             <ng-template [ngIf]="selectedComponent === 'dashboard'">
                 <p>eCommerce</p>
                 <analytics></analytics>
