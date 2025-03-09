@@ -4,20 +4,23 @@ import { Component, Input,  OnChanges, OnInit, SimpleChanges } from '@angular/co
   selector: 'common-table',
   imports: [],
   templateUrl: './common-table.component.html',
-  styleUrl: './common-table.component.scss'
+  styleUrl: './common-table.component.scss',
 })
-export class CommonTableComponent implements OnInit  , OnChanges{
+export class CommonTableComponent implements OnInit, OnChanges {
   @Input() tableData: any[] = [];
-  header: string[] = [];
-  
-  ngOnInit(): void {
-    
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.tableData?.length > 0) {
-      this.header = Object.keys(this.tableData[0]);
+  @Input() header: any[] = [];
+  openDropdown : boolean = false;
+  selectedRowIndex: number | null = null; 
+
+  ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {}
+  onAction(index: number, value: any) {
+     if (this.selectedRowIndex === index) {
+      this.openDropdown = false;
+      this.selectedRowIndex = null;
+    } else {
+      this.openDropdown = true;
+      this.selectedRowIndex = index;
     }
-    console.log(this.tableData, changes);
   }
-  
 }

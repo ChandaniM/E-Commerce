@@ -1,17 +1,34 @@
-<div class="admin-dashboard" >
+<div class="admin-dashboard">
     <div class="left-panel">
         <div class="logo">
             <img src="/images/logo.png" alt="">
         </div>
         <div class="admin-wrapper">
-            <div class="flex-space-gap" >
-                <i class="bi bi-speedometer2"></i>
-                <span  class="cursor-pointer" (click)="showComponent('dashboard')">Dashboard</span>
-            </div>
             <div class="flex-space-gap">
-                <i class="bi bi-people-fill"></i>
-                <span class="cursor-pointer">User's</span>
+                <i class="bi bi-speedometer2"></i>
+                <span class="cursor-pointer" (click)="showComponent('dashboard')">Dashboard</span>
             </div>
+            <div class="flex-space space-between">
+                <span class="flex-space-gap">
+                    <i class="bi bi-people-fill"></i>
+                    <span class="cursor-pointer">User's</span>
+                </span>
+                <span class="cursor-pointer" (click)="userDropdownToggle()">
+                    @if(!userDropdownBol){
+                    <i class="bi bi-chevron-down"></i>
+                    }
+                    @else{
+                    <i class="bi bi-chevron-right"></i>
+                    }
+                </span>
+
+            </div>
+            @if(userDropdownBol){
+            <ul>
+                <li class="cursor-pointer" (click)="showComponent('user-form')">Add User's</li>
+                <li  class="cursor-pointer" (click)="showComponent('user-list')">User's List </li>
+            </ul>
+            } 
             <div class="flex-space space-between">
                 <span class="flex-space-gap ">
                     <i class="bi bi-cart"></i>
@@ -19,19 +36,19 @@
                 </span>
                 <span class="cursor-pointer" (click)="ToggleDropDown()">
                     @if(!dropDownBol){
-                        <i class="bi bi-chevron-down"></i>
+                    <i class="bi bi-chevron-down"></i>
                     }
                     @else{
-                        <i class="bi bi-chevron-right"></i>
+                    <i class="bi bi-chevron-right"></i>
                     }
                 </span>
             </div>
             @if(dropDownBol){
-                <ul>
-                    <li class="cursor-pointer" (click)="showComponent('table')" >Product list</li>
-                    <li class="cursor-pointer" (click)="showComponent('add-product')">Add Product</li>
-                    <li class="cursor-pointer" (click)="showComponent('category')">Add Category</li>
-                </ul>
+            <ul>
+                <li class="cursor-pointer" (click)="showComponent('product-table')">Product list</li>
+                <li class="cursor-pointer" (click)="showComponent('add-product')">Add Product</li>
+                <li class="cursor-pointer" (click)="showComponent('category')">Add Category</li>
+            </ul>
             }
         </div>
     </div>
@@ -45,40 +62,55 @@
                 <i class="bi bi-bell"></i>
                 <span (click)="themeMode()">
                     @if (!themeModeBol) {
-                        <i class="bi bi-moon-stars"></i>
+                    <i class="bi bi-moon-stars"></i>
                     } @else {
-                        <i class="bi bi-moon-stars-fill"></i>
+                    <i class="bi bi-moon-stars-fill"></i>
                     }
-                  </span>
+                </span>
                 <div class="profile" (click)="toggleProfileDropdown()">
                     <img src="/images/admin.jpg" alt="">
                     @if(dropdownProfileVisible){
-                        <div class="dropdown">
-                            <ul>
-                              <li (click)="showComponent('user-profile')">View Profile</li>
-                            </ul>
-                          </div>
+                    <div class="dropdown">
+                        <ul>
+                            <li (click)="showComponent('user-profile')">View Profile</li>
+                        </ul>
+                    </div>
                     }
                 </div>
             </div>
         </div>
         <div class="dashboard-elements" [ngClass]="{'dark-theme-dashboard': themeModeBol, 'lightTheme': !themeModeBol}">
+            <ng-template [ngIf]="selectedComponent == 'user-form'">
+                <div>
+                    <app-dynamic-form (formSubmitted)="onFormSubmitted($event)"
+                        [formFields]="dynamicFields"></app-dynamic-form>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="selectedComponent == 'user-list'">
+                <div>
+                    <h3>User Management Table</h3>
+                    <common-table class="background-white" [header]="userManagementTable.header" [tableData]="userManagementTable.tableData"></common-table>
+                </div>
+            </ng-template>
             <ng-template [ngIf]="selectedComponent == 'user-profile'">
                 <user-profile></user-profile>
-              </ng-template>
+            </ng-template>
             <ng-template [ngIf]="selectedComponent === 'dashboard'">
                 <p>eCommerce</p>
                 <analytics></analytics>
             </ng-template>
             <ng-template [ngIf]="selectedComponent === 'category'">
                 <category></category>
-              </ng-template>
-        
-              <ng-template [ngIf]="selectedComponent === 'table'">
-                <common-table [tableData]="tableData"></common-table>
-              </ng-template>
-        
-              <ng-template [ngIf]="selectedComponent === 'add-product'">
+            </ng-template>
+
+            <ng-template [ngIf]="selectedComponent === 'product-table'">
+                <div>
+                    <h3>Product Inventory Table</h3>
+                    <common-table [header]="productInventoryTable.header" [tableData]="productInventoryTable.tableData"></common-table>
+                </div>
+            </ng-template>
+
+            <ng-template [ngIf]="selectedComponent === 'add-product'">
                 <h5>Add Product</h5>
                 <add-product></add-product>
                 <div class="bg-white flex-space">
@@ -89,14 +121,14 @@
                     <div>
                         <span>
                             Design by Chandani Mourya.
-                        </span> 
+                        </span>
                     </div>
-                </div> 
-              </ng-template>
-        
-              <ng-template [ngIf]="selectedComponent === ''">
+                </div>
+            </ng-template>
+
+            <ng-template [ngIf]="selectedComponent === ''">
                 <p>Select a component to display</p>
-              </ng-template>
+            </ng-template>
         </div>
     </div>
 </div>

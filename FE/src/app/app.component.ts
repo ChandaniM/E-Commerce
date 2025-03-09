@@ -14,7 +14,7 @@ import { environment } from '../environments/environment';
 export class AppComponent implements OnInit{
   title = 'FE';
   themeMode : string = ""
-  isAdmin : boolean = false;
+  isAdmin : boolean = true;
 
   ngOnInit(): void {
     this.themeMode  = environment.themeMode 

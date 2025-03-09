@@ -33,3 +33,11 @@ body{
     overflow: hidden;
     height: 100vh;
 }
+.flex-space-gap{
+  display: flex;
+  gap: 8px;
+}
+.flex-space-between{
+  display: flex;
+  justify-content: space-between;
+}

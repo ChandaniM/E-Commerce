@@ -1,0 +1,36 @@
+   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of formFields">
+      <label>{{ field.label }}</label>
+  
+      <!-- Text, Email, Password, Number Fields -->
+      <input *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'"
+             [type]="field.type" 
+             [formControlName]="field.name" 
+             [placeholder]="field.label"
+             [readonly]="field.readonly"/>
+  
+      <!-- Textarea -->
+      <textarea *ngIf="field.type === 'textarea'" [formControlName]="field.name" [placeholder]="field.label"></textarea>
+  
+      <!-- Date -->
+      <input *ngIf="field.type === 'date'" type="date" [formControlName]="field.name" />
+  
+      <!-- Select Dropdown -->
+      <select *ngIf="field.type === 'select'" [formControlName]="field.name">
+        <option *ngFor="let option of field.options" [value]="option">{{ option }}</option>
+      </select>
+  
+      <!-- Checkbox -->
+      <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name" class="type-checked"/>
+  
+      <!-- File Upload -->
+      <input *ngIf="field.type === 'file'" type="file" (change)="onFileChange($event)" />
+  
+      <div *ngIf="userForm.get(field.name)?.invalid && userForm.get(field.name)?.touched">
+        {{ field.label }} is required
+      </div>
+    </div>
+  
+    <button type="submit">Submit</button>
+  </form>
+  

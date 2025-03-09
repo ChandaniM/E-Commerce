@@ -52,8 +52,6 @@ export class AddProductComponent {
   submitForm() {
     if (this.productForm.valid) {
       console.log('Form Data:', this.productForm.value);
-      debugger
-      this.productService.addSingleProduct(this.productForm.value);
       alert('Product Submitted Successfully!');
     } else {
       alert('Fill all required fields!');

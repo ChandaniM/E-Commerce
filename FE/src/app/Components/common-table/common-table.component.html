@@ -1,18 +1,45 @@
-<table  style="width: 100%; text-align: center;">
+<table>
   <thead>
     <tr>
       @for (head of header; track head) {
-        <th>{{ head }}</th>
+        <th class="white-space">
+          {{ head.name }}
+          @if (head.icon) {
+            <i class="{{ head.icon }}"></i>
+          }
+        </th>
       }
     </tr>
   </thead>
   <tbody>
-    @for (data of tableData; track data) {
+    @for (data of tableData; track data; let i = $index) {
       <tr>
         @for (head of header; track head) {
-          <td>{{ data[head] }}</td>
+          <td>
+            @if (data[head.name]) {
+              @if (typeof data[head.name] === 'object') {
+                @if (data[head.name].value) {
+                  {{ data[head.name].value }}
+                }
+                @if (data[head.name].icon) {
+                  <i class="{{ data[head.name].icon }}" (click)="onAction( i, data[head.name])"></i>
+                  @if(openDropdown && selectedRowIndex === i) {
+                    <ul>
+                      <li >edit row</li>
+                    </ul>
+                  }
+
+                }
+              } @else {
+                {{ data[head.name] }}
+              }
+            } @else {
+              -
+            }
+          </td>
         }
       </tr>
     }
   </tbody>
 </table>
+
