@@ -7,6 +7,7 @@ import { AnalyticsComponent } from '../../Components/analytics/analytics.compone
 import { ThemeService } from '../../Services/theme.service';
 import { UserProfileComponent } from '../../Components/user-profile/user-profile.component';
 import { DynamicFormComponent } from '../../Components/dynamic-form/dynamic-form.component';
+import { ResponseMapperServiceService } from '../../Services/response-mapper-service.service';
 
 @Component({
   selector: 'admin-dashborad',
@@ -27,69 +28,10 @@ export class AdminDashboradComponent implements OnInit {
   userDropdownBol: boolean = false;
   themeModeBol: boolean = false;
   dropdownProfileVisible: boolean = false;
-  userManagementTable: { header: any[]; tableData: any[] } ={
-    "header": [
-      { "name": "Username", },
-      { "name": "Email"},
-      { "name": "Password" },
-      { "name": "First Name" },
-      { "name": "Last Name" },
-      { "name": "Phone Number" },
-      { "name": "Country" },
-      { "name": "Place" },
-      { "name": "Address" },
-      { "name": "Postal Code" },
-      { "name": "Date of Birth"},
-      { "name": "Wallet Balance" },
-      { "name": "Is Active" },
-      { "name": "Created At" },
-      { "name": "Updated At" },
-      { "name": "Role" },
-      { "name": "Settings" } 
-    ],
-    "tableData": [
-      {
-        "Username": { "value": "john_doe" },
-        "Email": { "value": "john@example.com" },
-        "Password": "********",
-        "First Name": "John",
-        "Last Name": "Doe",
-        "Phone Number": { "value": "+1234567890" },
-        "Country": "USA",
-        "Place": "New York",
-        "Address": "123, Elm Street",
-        "Postal Code": "10001",
-        "Date of Birth": { "value": "1990-01-01"},
-        "Wallet Balance": { "value": 150.75, },
-        "Is Active": "yes",
-        "Created At": "2024-01-01 10:00:00",
-        "Updated At": "2024-01-05 15:30:00",
-        "Role": "customer",
-        "Settings": { "icon": "bi bi-gear" , onAction : true } 
-      },
-      {
-        "Username": { "value": "john_doe" },
-        "Email": { "value": "john@example.com" },
-        "Password": "********",
-        "First Name": "John",
-        "Last Name": "Doe",
-        "Phone Number": { "value": "+1234567890" },
-        "Country": "USA",
-        "Place": "New York",
-        "Address": "123, Elm Street",
-        "Postal Code": "10001",
-        "Date of Birth": { "value": "1990-01-01"},
-        "Wallet Balance": { "value": 150.75, },
-        "Is Active": "yes",
-        "Created At": "2024-01-01 10:00:00",
-        "Updated At": "2024-01-05 15:30:00",
-        "Role": "admin",
-        "Settings": { "icon": "bi bi-gear" , onAction : true } 
-      }
-    ]
-  }
-  
-  
+  userManagementTable: { header: any[]; tableData: any[] } = {
+    header: [],
+    tableData: [],
+  };
 
   dynamicFields = [
     { name: 'username', label: 'Username', type: 'text', required: true },
@@ -154,69 +96,77 @@ export class AdminDashboradComponent implements OnInit {
     },
   ];
 
-  constructor(public themeService: ThemeService) {}
+  constructor(
+    public themeService: ThemeService,
+    private mapperService: ResponseMapperServiceService
+  ) {}
 
   selectedComponent: string = 'user-list';
   productInventoryTable = {
-  "header": [
-    { "name": "Product Name"},
-    { "name": "Product Category", },
-    { "name": "Product Price" },
-    { "name": "Product Quantity"},
-    { "name": "Stock Status"},
-    { "name": "Added Date"},
-    { "name": "Supplier"},
-    { "name": "Settings" }
-  ],
-  "tableData": [
-    {
-      "Product Name": { "value": "Laptop" },
-      "Product Category": "Electronics",
-      "Product Price": { "value": 999.99},
-      "Product Quantity": { "value": 10},
-      "Stock Status": "In Stock",
-      "Added Date": { "value": "2024-03-01" },
-      "Supplier": "TechCorp",
-      "Settings": { "icon": "bi bi-gear" }
-    },
-    {
-      "Product Name": { "value": "Smartphone"},
-      "Product Category": "Electronics",
-      "Product Price": { "value": 799.50,},
-      "Product Quantity": { "value": 25,},
-      "Stock Status": "In Stock",
-      "Added Date": { "value": "2024-02-20"},
-      "Supplier": "MobileWorld",
-      "Settings": { "icon": "bi bi-gear" }
-    },
-    {
-      "Product Name": { "value": "Headphones" },
-      "Product Category": "Accessories",
-      "Product Price": { "value": 199.99 },
-      "Product Quantity": { "value": 15},
-      "Stock Status": "Out of Stock",
-      "Added Date": { "value": "2024-02-28" },
-      "Supplier": "AudioTech",
-      "Settings": { "icon": "bi bi-gear" , onAction : true }
-    },
-    {
-      "Product Name": { "value": "Smartwatch" },
-      "Product Category": "Wearables",
-      "Product Price": { "value": 299.99 },
-      "Product Quantity": { "value": 30},
-      "Stock Status": "In Stock",
-      "Added Date": { "value": "2024-01-15" },
-      "Supplier": "WearableTech",
-      "Settings": { "icon": "bi bi-gear" }
-    }
-  ]
-}
-
-  
+    header: [
+      { name: 'Product Name' },
+      { name: 'Product Category' },
+      { name: 'Product Price' },
+      { name: 'Product Quantity' },
+      { name: 'Stock Status' },
+      { name: 'Added Date' },
+      { name: 'Supplier' },
+      { name: 'Settings' },
+    ],
+    tableData: [
+      {
+        'Product Name': { value: 'Laptop' },
+        'Product Category': 'Electronics',
+        'Product Price': { value: 999.99 },
+        'Product Quantity': { value: 10 },
+        'Stock Status': 'In Stock',
+        'Added Date': { value: '2024-03-01' },
+        Supplier: 'TechCorp',
+        Settings: { icon: 'bi bi-gear' },
+      },
+      {
+        'Product Name': { value: 'Smartphone' },
+        'Product Category': 'Electronics',
+        'Product Price': { value: 799.5 },
+        'Product Quantity': { value: 25 },
+        'Stock Status': 'In Stock',
+        'Added Date': { value: '2024-02-20' },
+        Supplier: 'MobileWorld',
+        Settings: { icon: 'bi bi-gear' },
+      },
+      {
+        'Product Name': { value: 'Headphones' },
+        'Product Category': 'Accessories',
+        'Product Price': { value: 199.99 },
+        'Product Quantity': { value: 15 },
+        'Stock Status': 'Out of Stock',
+        'Added Date': { value: '2024-02-28' },
+        Supplier: 'AudioTech',
+        Settings: { icon: 'bi bi-gear', onAction: true },
+      },
+      {
+        'Product Name': { value: 'Smartwatch' },
+        'Product Category': 'Wearables',
+        'Product Price': { value: 299.99 },
+        'Product Quantity': { value: 30 },
+        'Stock Status': 'In Stock',
+        'Added Date': { value: '2024-01-15' },
+        Supplier: 'WearableTech',
+        Settings: { icon: 'bi bi-gear' },
+      },
+    ],
+  };
 
   ngOnInit(): void {
     this.themeService.setTheme(this.themeModeBol);
+    this.loadUserData();
     console.log(this.themeService.getTheme());
+  }
+  loadUserData() {
+    this.mapperService.getModifyUserList().subscribe((modifiedData) => {
+      this.userManagementTable.header = modifiedData.header;
+      this.userManagementTable.tableData = modifiedData.tableData;
+    });
   }
   showComponent(component: string) {
     console.log('Clicked:', component);
