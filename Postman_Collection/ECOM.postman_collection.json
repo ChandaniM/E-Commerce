@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "6c81ff6f-894f-4848-9ca5-7f389a5e1ca0",
+		"name": "ECOM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23889152"
+	},
+	"item": [
+		{
+			"name": "Product Management",
+			"item": [
+				{
+					"name": "GetAllProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/products"
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3000/products/B00NH11KIK"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart Management",
+			"item": []
+		},
+		{
+			"name": "Wishlist Management",
+			"item": []
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin Dashboard Route",
+					"item": []
+				},
+				{
+					"name": "User Management (Admin)",
+					"item": [
+						{
+							"name": "Delete a user (Admin)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3000/delete/8"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product Management",
+					"item": [
+						{
+							"name": "Update product details (Admin)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"rating\": \"5\",\n        \"discounted_price\": \"₹300\",\n            \"actual_price\": \"₹650\",\n            \"discount_percentage\": \"70%\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:3000/products/B00NH11KIK"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a product (Admin)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3000/products/B00NH11KIK"
+							},
+							"response": []
+						},
+						{
+							"name": "AddProduct (Admin)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n            \"product_id\": \"B00NH11KIK\",\n            \"product_name\": \"Amazon Basics USB 2.0 Cable - A-Male to B-Male - for Personal Computer\",\n            \"category\": \"Computers&Accessories|Accessories&Peripherals|Cables&Accessories|Cables|USBCables\",\n            \"discounted_price\": \"₹300\",\n            \"actual_price\": \"₹650\",\n            \"discount_percentage\": \"70%\",\n            \"rating\": \"5\",\n            \"rating_count\": \"1,07,687\",\n            \"about_product\": \"One 6-foot-long (1.8 meters) high-speed multi-shielded USB 2.0 A-Male to B-Male cable|Connects mice, keyboards and speed-critical devices, such as external hard drives, printers and cameras to your computer|Constructed with corrosion-resistant, gold-plated connectors for optimal signal clarity and shielding to minimize interference|Full 2.0 USB capability/480 Mbps transfer speed|1 year limited warranty\",\n            \"user_id\": \"AEYHTCWWZYU3JQBU6SLNFFT3OMVQ,AENQPV63OVBZHJ7L7V37M2ADFY7Q,AH7J7BCTWAMK2REWT4AMA2V5DPUQ,AFZSC27UUKDN5VYQVMAPYZNQTULA,AHM56NVJXROPTI5WICZITI4YAZAA,AEWZZXQWEU2QSVBCT7AJQ3FXMZWA,AFBLTBDVC23HRPXW2OQ2JDV3BNNQ,AGCX23QVQFBCYCAUWQNM4YHMKMQA\",\n            \"user_name\": \"Shiva,Uzef,kottala samuel,Renjith,Dhivakaran,Mark,Utkarsh Tripathi,Vijay Sreekantan\",\n            \"review_id\": \"R2AE3BN2Y58N55,R6YVRITBSRECR,R232KD83Q3MVML,R23FRK2ABESQGU,R3NE24KAHO8M69,R2PZRPBF9ZAOMA,R1DC9VBYLSSEB,R2BBEAL7JZWXYR\",\n            \"review_title\": \"Functionality as described,Working,Great USB in budget,Good,Good,It just works,Works with my Casio ct-x700 well,Still working after 3 months\",\n            \"review_content\": \"Using it and satisfactory.,Working good also not so expensive,Using this for an audio transition from Yamaha mgxu20 sound mixer to the laptop for live purpose excellent quality.,Bought it before one and a half month.... Works well.. Satisfied...🙂,Good quality, and cheap price,Great for the price works with my usb mic fantastically well. Just I find the usb b side is a bit loose when compared to my original OEM cables.. I have ordered several pairs but all are same. At least for my mic. But it’s not too loose to be called unusable,Works with my Casio ct-x700 well,\",\n            \"img_link\": \"https://m.media-amazon.com/images/I/4101vlzySzL._SY300_SX300_QL70_FMwebp_.jpg\",\n            \"product_link\": \"https://www.amazon.in/AmazonBasics-USB-2-0-Cable-Male/dp/B00NH11KIK/ref=sr_1_44?qid=1672909125&s=electronics&sr=1-44\"\n        }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3000/addproducts"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Global routes for all",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 11,\n    \"product_id\": \"a402cd2262\",\n    \"quantity\": 2,\n    \"added_at\":\"\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/addToCart"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john_doe\",\n    \"password\" : \"hashed_password_1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": []
+		}
+	]
+}
