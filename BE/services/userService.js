@@ -162,10 +162,22 @@ const deleteUserAccount = (data) => {
     });
   });
 };
+const getUserList = () => {
+  return new Promise((resolve, reject) => {
+    connection.query(query.getUserList, (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
 module.exports = {
   signupUser,
   loginUser,
   getProfile,
   updateUserProfile,
   deleteUserAccount,
+  getUserList,
 };

@@ -8,6 +8,8 @@ const addProduct = `INSERT INTO products(product_id,product_name,category,discou
 const productById = `SELECT * FROM products where product_id = ?;`;
 const deleteProduct = `DELETE FROM products WHERE product_id = ? ;`;
 const getuserProfile = `SELECT * FROM users WHERE id = ?;`;
+const getUserList = "SELECT * FROM users;";
+
 module.exports = {
   getListOfProduct,
   LOGIN_QUERY,
@@ -17,4 +19,5 @@ module.exports = {
   deleteUserAccount,
   deleteProduct,
   getuserProfile,
+  getUserList,
 };

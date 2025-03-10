@@ -79,6 +79,15 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
+const getUserListController = async (req, res) => {
+  try {
+    let userResponse = await userService.getUserList();
+    res.status(200).send(userResponse);
+  } catch (error) {
+    res.status(500).send(error.message || "Internal Server Error");
+  }
+};
+
 module.exports = {
   signup,
   login,
@@ -86,4 +95,5 @@ module.exports = {
   updateUserdetailsController,
   getProfile,
   updateUserProfile,
+  getUserListController,
 };
