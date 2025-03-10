@@ -1,0 +1,106 @@
+:root {
+  /* Primary Colors */
+  --primary-color: #1976d2;
+  --primary-light: #63a4ff;
+  --primary-dark: #004ba0;
+
+  /* Secondary Colors */
+  --secondary-color: #c2185b;
+  --secondary-light: #fa5788;
+  --secondary-dark: #8c0032;
+
+  /* Accent Colors */
+  --accent-color: #ff9800;
+  --accent-light: #ffc947;
+  --accent-dark: #c66900;
+
+  /* Success Colors */
+  --success-color: #4caf50;
+  --success-light: #80e27e;
+  --success-dark: #087f23;
+
+  /* Error Colors */
+  --error-color: #f44336;
+  --error-light: #ff7961;
+  --error-dark: #ba000d;
+
+  /* Warning Colors */
+  --warning-color: #ffeb3b;
+  --warning-light: #ffff72;
+  --warning-dark: #c8b900;
+
+  /* Info Colors */
+  --info-color: #2196f3;
+  --info-light: #6ec6ff;
+  --info-dark: #0069c0;
+
+  /* Neutral/Gray Colors */
+  --gray-100: #f5f5f5;
+  --gray-200: #eeeeee;
+  --gray-300: #e0e0e0;
+  --gray-400: #bdbdbd;
+  --gray-500: #9e9e9e;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+  --gray-900: #212121;
+
+  /* Product-Specific Colors */
+  --product-primary: #ff5722;
+  --product-secondary: #ffffff;
+  --product-gray: #cccccc;
+  --product-highlight: #ff5a5f;
+  --product-text: #333333;
+
+  /* Basic Text and Background Colors */
+  --text-color: #000000;               /* Black */
+  --text-color-white: #ffffff;         /* White */
+  --background-color: #f5f5f5;         /* Light Gray */
+  --background-color-black: #000000;   /* Black */
+  --background-color-blue: #1976d2;    /* Blue */
+  --background-color-light: #EFEEE8;   /* Light Beige */
+  --background-color-offwhite: #F1F3F2;/* Off White */
+  --background-color-pale: #F3F4E9;    /* Pale Yellowish */
+  --dark-gray-black: #111114;          /* Dark Grayish Black */
+  --dark-gray: #303034;                /* Dark Gray */
+  --very-dark-gray: #101013;           /* Very Dark Gray */
+  --card-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* Extracted Colors from Image */
+  --white: #FFFEFEff;
+  --misty-rose: #FEE5E7ff;
+  --lavender-web: #E6ECFFff;
+  --papaya-whip: #FFEBCCff;
+  --cornflower-blue: #5C86FFff;
+  --mint-green: #D2F6EFff;
+  --alice-blue: #E4F5FEff;
+
+  /* CSS HSL */
+  --hsl-misty-rose: hsla(355, 93%, 95%, 1);
+  --hsl-lavender-web: hsla(226, 100%, 95%, 1);
+  --hsl-white: hsla(0, 100%, 100%, 1);
+  --hsl-papaya-whip: hsla(36, 100%, 90%, 1);
+  --hsl-cornflower-blue: hsla(225, 100%, 68%, 1);
+  --hsl-mint-green: hsla(168, 67%, 89%, 1);
+  --hsl-alice-blue: hsla(201, 93%, 95%, 1);
+
+  /* CSS RGB */
+  --rgb-misty-rose: rgba(254, 229, 231, 1);
+  --rgb-lavender-web: rgba(230, 236, 255, 1);
+  --rgb-white: rgba(255, 254, 254, 1);
+  --rgb-papaya-whip: rgba(255, 235, 204, 1);
+  --rgb-cornflower-blue: rgba(92, 134, 255, 1);
+  --rgb-mint-green: rgba(210, 246, 239, 1);
+  --rgb-alice-blue: rgba(228, 245, 254, 1);
+
+  /* CSS Gradients */
+  --gradient-top: linear-gradient(0deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-right: linear-gradient(90deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-bottom: linear-gradient(180deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-left: linear-gradient(270deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-top-right: linear-gradient(45deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-bottom-right: linear-gradient(135deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-top-left: linear-gradient(225deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-bottom-left: linear-gradient(315deg, #FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+  --gradient-radial: radial-gradient(#FEE5E7ff, #E6ECFFff, #FFFEFEff, #FFEBCCff, #5C86FFff, #D2F6EFff, #E4F5FEff);
+}

@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg bg-light shadow-sm px-3" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/images/brandlogo.png" alt="Brandlogo" height="40">
+    </a>
+    <div class="search-container">
+      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      <button type="submit">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+    <div>
+      <i class="bi bi-heart fs-4 m-3"></i>
+      <i (click)="cart.toggleCart()" class="bi bi-cart2 fs-4 m-3"></i>
+      <i class="bi bi-person fs-3 m-3"></i>
+    </div>
+  </div>
+</nav>
+<cart-sidebar #cart></cart-sidebar>

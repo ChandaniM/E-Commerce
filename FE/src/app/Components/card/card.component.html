@@ -1,0 +1,55 @@
+<div
+  class="product-card"
+  [ngClass]="product.layout || ''"
+  [ngStyle]="{
+    'max-width': product.features.cardWidth ? product.features.cardWidth : ''
+  }"
+>
+  <div
+    class="product-image"
+    [ngClass]="{ imageWidth: product.features.cardWidth }"
+  >
+    <img
+      [src]="product.image.length > 0 ? product.image : '/images/brandlogo.png'"
+      alt="{{ product.name }}"
+    />
+  </div>
+
+  <div class="product-info">
+    <h4
+    class="text-link"
+      [ngClass]="{
+        'text-center': product.features.titleAlignment === 'center'
+      }"
+      routerLink="/product-details"
+    >
+      {{ product.name }}
+    </h4>
+    <p>{{ product.description }}</p>
+
+    <div *ngIf="product.rating > 0" class="rating">⭐ {{ product.rating }}</div>
+
+    <div
+      *ngIf="product.features.gramsTags && product.grams.length > 0"
+      class="grams"
+    >
+      <span *ngFor="let gram of product.grams">{{ gram }}</span>
+    </div>
+
+    <div *ngIf="product.price > 0" class="price">
+      {{ product.price | currency }}
+    </div>
+
+    <div class="button-style" [ngClass]="product.features.buttonWrapper">
+      <input
+        *ngIf="product.features.input.show"
+        [type]="product.features.input.type"
+        min="1"
+        placeholder="Enter quantity"
+      />
+      <button *ngIf="product.features.button.show">
+        {{ product.features.button.text }}
+      </button>
+    </div>
+  </div>
+</div>

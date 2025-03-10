@@ -1,0 +1,160 @@
+.cart-page {
+    width: 80%;
+    margin: auto;
+    height: 70vh;
+    text-align: center;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cart-table th, .cart-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.cart-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.cart-footer {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 18px;
+}
+
+#checkout-btn {
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    button {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background: #388e3c;
+      }
+    }
+
+    input {
+      width: 50px;
+      text-align: center;
+      font-size: 16px;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  }
+
+
+  .cart-page {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.table-wrapper {
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    border: 1px solid #ddd;
+}
+
+/* Fix table headers */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table thead {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+.cart-table th, .cart-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.cart-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-control input {
+    width: 50px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.cart-footer {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 18px;
+}
+
+#checkout-btn {
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
