@@ -4,10 +4,11 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { AdminDashboradComponent } from './Pages/admin-dashborad/admin-dashborad.component';
 import { environment } from '../environments/environment';
+import { ToastComponent } from './Components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet , NavbarComponent , FooterComponent , AdminDashboradComponent],
+  imports: [RouterOutlet , NavbarComponent , FooterComponent , AdminDashboradComponent , ToastComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

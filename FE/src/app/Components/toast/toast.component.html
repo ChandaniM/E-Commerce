@@ -1,0 +1,4 @@
+<div *ngIf="toastService.toast$ | async as toast" class="toast-container" [ngClass]="toast.type">
+    {{ toast.message }}
+</div>
+  
