@@ -25,7 +25,8 @@
                   <i class="{{ data[head.name].icon }}" (click)="onAction( i, data[head.name])"></i>
                   @if(openDropdown && selectedRowIndex === i) {
                     <ul>
-                      <li >edit row</li>
+                      <li (click)="editUser(i , data)">edit row</li>
+                      <li (click)="deleteUser()" >Delete user's</li>
                     </ul>
                   }
 

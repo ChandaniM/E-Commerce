@@ -1,0 +1,71 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label>Username</label>
+        <input type="text" formControlName="username" />
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+    </div>
+    <div>
+        <label>Password</label>
+        <input type="password" formControlName="password" />
+    </div>
+    <div>
+        <label>First Name</label>
+        <input type="text" formControlName="first_name" />
+    </div>
+    <div>
+        <label>Last Name</label>
+        <input type="text" formControlName="last_name" />
+    </div>
+    <div>
+        <label>Phone Number</label>
+        <input type="text" formControlName="phone_number" />
+    </div>
+    <div>
+        <label>Country</label>
+        <select formControlName="country">
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="Canada">Canada</option>
+        </select>
+    </div>
+    <div>
+        <label>Place</label>
+        <input type="text" formControlName="place" />
+    </div>
+    <div>
+        <label>Address</label>
+        <textarea formControlName="address"></textarea>
+    </div>
+    <div>
+        <label>Postal Code</label>
+        <input type="text" formControlName="postal_code" />
+    </div>
+    <div>
+        <label>Date of Birth</label>
+        <input type="date" formControlName="date_of_birth" />
+    </div>
+    <div>
+        <label>Profile Picture</label>
+        <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    <div>
+        <label>Wallet Balance</label>
+        <input type="number" formControlName="wallet_balance" readonly />
+    </div>
+    <div>
+        <label>Is Active</label>
+        <input type="checkbox" formControlName="is_active" />
+    </div>
+    <div>
+        <label>Role</label>
+        <select formControlName="role">
+          <option value="Customer">Customer</option>
+          <option value="Admin">Admin</option>
+        </select>
+    </div>
+
+        <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>
