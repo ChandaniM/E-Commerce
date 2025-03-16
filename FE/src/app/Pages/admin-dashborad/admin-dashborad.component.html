@@ -82,14 +82,16 @@
         <div class="dashboard-elements" [ngClass]="{'dark-theme-dashboard': themeModeBol, 'lightTheme': !themeModeBol}">
             <ng-template [ngIf]="selectedComponent == 'user-form'">
                 <div>
-                    <app-dynamic-form (formSubmitted)="onFormSubmitted($event)"
-                        [formFields]="dynamicFields"></app-dynamic-form>
+                    <user-form (formUpdated)="onFormUpdated($event)"></user-form>
+                    <!-- <app-dynamic-form (formSubmitted)="onFormSubmitted($event)"
+                        [formFields]="dynamicFields" ></app-dynamic-form> -->
                 </div>
             </ng-template>
             <ng-template [ngIf]="selectedComponent == 'user-list'">
                 <div>
                     <h3>User Management Table</h3>
-                    <common-table class="background-white" [header]="userManagementTable.header" [tableData]="userManagementTable.tableData"></common-table>
+                    <user-table (editUserDetails)="userDetails($event)"></user-table>
+                    <!-- <common-table class="background-white" (editUserDetails)="userDetails($event)" [header]="userManagementTable.header" [tableData]="userManagementTable.tableData"></common-table> -->
                 </div>
             </ng-template>
             <ng-template [ngIf]="selectedComponent == 'user-profile'">
