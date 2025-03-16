@@ -16,7 +16,7 @@ export class AddProductComponent {
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
       category: ['', Validators.required],
-      slug: ['', Validators.required],
+      Supplier: ['', Validators.required],
       description: [''],
       price: ['', Validators.required],
       quantity: ['', Validators.required],
