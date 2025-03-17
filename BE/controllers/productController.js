@@ -99,7 +99,7 @@ const addProductReview = async (req, res) => {
 // Get product reviews
 const getProductReviews = async (req, res) => {
   try {
-    const productReviewId = req.params['productId']
+    const productReviewId = req.params["productId"];
     let resposne = await productService.getProductReviews(productReviewId);
     res.status(200).send(resposne);
   } catch (error) {
@@ -110,6 +110,15 @@ const getProductReviews = async (req, res) => {
 // Delete a review (Admin/User)
 const deleteReview = (req, res) => {
   // Logic to delete a review
+};
+
+const getAllCategory = async (req, res) => {
+  try {
+    let resposne = await productService.getAllCategoryService(productReviewId);
+    res.status(200).send(resposne);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 };
 
 module.exports = {
@@ -125,4 +134,5 @@ module.exports = {
   addProductReview,
   getProductReviews,
   deleteReview,
+  getAllCategory,
 };

@@ -34,6 +34,9 @@ router.delete("/products/:id", productController.deleteProduct);
 
 // Delete a review (Admin/User) -- Done
 router.delete("/products/review/:reviewId", productController.deleteReview);
+// Get All Category 
+router.get("/products/category" , productController.getAllCategory);
+
 
 // Get products by category
 router.get(
