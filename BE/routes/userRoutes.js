@@ -8,6 +8,9 @@ router.delete("/delete/:id", userController.deleteUserAccountController);
 router.get("/auth/profile", userController.getProfile);
 router.put("/auth/profile/update/:id", userController.updateUserProfile);
 router.get("/user-list", userController.getUserListController);
+router.post("/addUser", userController.addNewUserController);
+router.patch('/update/:id', userController.updateUser);
+
 // router.post("/auth/forgot-password", userController.forgetUserPassword);
 // router.post("/auth/reset-password" ,  userController.resetUsersPassword);
 
