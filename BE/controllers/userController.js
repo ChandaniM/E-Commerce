@@ -41,6 +41,17 @@ const deleteUserAccountController = async (req, res) => {
   }
 };
 
+const addNewUserController = async (req, res) => {
+  try {
+    let request = req.body;
+    console.log(request, "addNewUserController");
+    let response = await userService.addNewUserService(request);
+    console.log(response, "from services");
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 const updateUserdetailsController = async (req, res) => {
   try {
     let data = req.params["id"];
@@ -88,6 +99,8 @@ const getUserListController = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {};
+
 module.exports = {
   signup,
   login,
@@ -96,4 +109,6 @@ module.exports = {
   getProfile,
   updateUserProfile,
   getUserListController,
+  addNewUserController,
+  updateUser,
 };

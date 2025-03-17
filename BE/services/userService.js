@@ -154,9 +154,17 @@ const deleteUserAccount = (data) => {
       } else {
         console.log(result);
         if (result.affectedRows === 0) {
-          reject("User id is not exist.");
+          reject({
+            success: false,
+            message: "User id is not exist",
+            affectedRows: result.affectedRows,
+          });
         } else {
-          resolve(result);
+          resolve({
+            success: true,
+            message: "User Delete successfully!",
+            affectedRows: result.affectedRows,
+          });
         }
       }
     });
@@ -173,6 +181,64 @@ const getUserList = () => {
     });
   });
 };
+const addNewUserService = (data) => {
+  let {
+    username,
+    email,
+    password,
+    first_name,
+    last_name,
+    phone_number,
+    country,
+    place,
+    address,
+    postal_code,
+    date_of_birth,
+    profile_picture,
+    wallet_balance,
+    is_active,
+    role,
+  } = data;
+  return new Promise((resolve, reject) => {
+    console.log(data, "services");
+    connection.query(
+      query.addNewUser,
+      [
+        username,
+        email,
+        password,
+        first_name,
+        last_name,
+        phone_number,
+        country,
+        place,
+        address,
+        postal_code,
+        date_of_birth,
+        profile_picture,
+        wallet_balance,
+        is_active,
+        role,
+      ],
+      (err, results) => {
+        if (err) {
+          reject({
+            success: false,
+            message: "Something Went Wrong.",
+            affectedRows: err,
+          });
+        } else {
+          resolve({
+            success: true,
+            message: "New User Added Successfully!",
+            affectedRows: results.affectedRows,
+          });
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   signupUser,
   loginUser,
@@ -180,4 +246,5 @@ module.exports = {
   updateUserProfile,
   deleteUserAccount,
   getUserList,
+  addNewUserService,
 };
