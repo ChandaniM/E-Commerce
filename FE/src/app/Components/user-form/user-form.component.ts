@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../Services/users.service';
-import { ToastService } from '../../Services/toast.service';
+import { Helper } from '../../helpers/helper';
 
 @Component({
   selector: 'user-form',
@@ -11,8 +11,10 @@ import { ToastService } from '../../Services/toast.service';
 })
 export class UserFormComponent {
   userForm!: FormGroup;
-  @Output() formUpdated = new EventEmitter<{ updated: boolean, data: any }>();
-  constructor(private fb: FormBuilder, private userService: UsersService , private toastService: ToastService) { }
+  data = {}
+  isFormComeFromEditValue :boolean = false;
+  @Output() formUpdated = new EventEmitter<{ updated: boolean, data: any , fromWhere:boolean }>();
+  constructor(private fb: FormBuilder, private userService: UsersService , private helper: Helper) { }
 
   ngOnInit() {
     this.buildForm();
@@ -20,10 +22,15 @@ export class UserFormComponent {
   }
 
   patchValueForm() {
-    this.userService.userDetails.subscribe((data) => {
-      console.log(data)
-      if (data) {
-        this.patchValue(data)
+    this.userService.userDetails.subscribe((response) => {
+      console.log(response)
+      let fromFeilds = response.data;
+      this.isFormComeFromEditValue = response.type == "edit" ? true :false 
+       if(this.isFormComeFromEditValue){
+        this.data = fromFeilds
+       }
+      if (fromFeilds && response.type == "edit") {
+        this.patchValue(fromFeilds)
       }
     });
   }
@@ -62,7 +69,7 @@ export class UserFormComponent {
       postal_code: [''],
       date_of_birth: ['', Validators.required],
       profile_picture: [''],
-      wallet_balance: [{ value: 0.0, disabled: true }],
+      wallet_balance: [{ value: 0.0}],
       is_active: [true],
       role: ['', Validators.required],
     });
@@ -71,16 +78,17 @@ export class UserFormComponent {
   onSubmit() {
     if (this.userForm.valid) {
       console.log('Form Data:', this.userForm.value);
-      this.showSuccess()
-      this.formUpdated.emit({
-        updated: true,
-        data: this.userForm.value
-      });
+        this.formUpdated.emit({
+          updated: true,
+          data: !this.isFormComeFromEditValue ?  this.userForm.value : this.data ,
+          fromWhere : this.isFormComeFromEditValue
+        });
+      
     }
   }
 
   showSuccess() {
-    this.toastService.showToast('User updated successfully!', 'success');
+    this.helper.showMessage('User updated successfully!', 'success');
   }
 
   onFileSelected(event: Event) {

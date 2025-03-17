@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../model/addUser.typs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,14 @@ export class UsersService {
     }
 
     deleteUser(id:number){
-      console.log(this.apiUrl + `deleteUser/${id}`)
-      return this.http.delete<{ message: string }>(this.apiUrl + `deleteUser/${id}`)
+      return this.http.delete<any>(this.apiUrl + `delete/${id}`);
+    }
+
+    addNewUser(userData: User): Observable<any> {
+      return this.http.post<any>(`${this.apiUrl}addUser`, userData);
+    } 
+
+    updateUserData(userData: User , id:number): Observable<any>{
+      return this.http.put<any>(this.apiUrl+`editDetails/${id}` , userData);
     }
 }

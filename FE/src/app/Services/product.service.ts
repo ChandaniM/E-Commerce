@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { Product } from '../model/product.type';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
@@ -10,6 +10,8 @@ export class ProductService {
   apiUrl = environment.apiUrl;
   private readonly http: HttpClient = inject(HttpClient);
   productDetail = new Subject<Product[]>();
+  productModify = new BehaviorSubject({});
+
   constructor() { }
   getAllProduct():Observable<any[]>{
     return this.http.get<any[]>(this.apiUrl+`products`);
@@ -54,6 +56,12 @@ export class ProductService {
     );
   }
   
+  setProductFormAdmin(value:any){
+    this.productModify.next(value);
+  }
 
+  get productModifyByAdminDetails(): Observable<any> {
+    return this.productModify.asObservable(); 
+  }
     
 }

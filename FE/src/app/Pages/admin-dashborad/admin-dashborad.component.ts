@@ -6,28 +6,54 @@
   import { AnalyticsComponent } from '../../Components/analytics/analytics.component';
   import { ThemeService } from '../../Services/theme.service';
   import { UserProfileComponent } from '../../Components/user-profile/user-profile.component';
-  import { DynamicFormComponent } from '../../Components/dynamic-form/dynamic-form.component';
-  import { ResponseMapperServiceService } from '../../Services/response-mapper-service.service';
-import { UserFormComponent } from '../../Components/user-form/user-form.component';
-import { UserTableComponent } from '../../Components/user-table/user-table.component';
-import { UsersService } from '../../Services/users.service';
+  import { UserFormComponent } from '../../Components/user-form/user-form.component';
+  import { UserTableComponent } from '../../Components/user-table/user-table.component';
+  import { UsersService } from '../../Services/users.service';
+  import { Helper } from '../../helpers/helper';
+import { ProductTableComponent } from '../../Components/product-table/product-table.component';
+import { ProductService } from '../../Services/product.service';
+
+
+export interface Product {
+  product_id: string;
+  product_name: string;
+  short_title: string;
+  category: string;
+  discounted_price: string;
+  actual_price: string;
+  discount_percentage: string;
+  rating: number;
+  rating_count: number;
+  about_product: string;
+  detail_description: string;
+  grams: string;
+  on_sale: number;
+  user_id: number;
+  user_name: string;
+  review_id: string;
+  review_title: string;
+  review_content: string;
+  img_link: string;
+  product_link: string;
+}
 
   @Component({
     selector: 'admin-dashborad',
     imports: [
       AddProductComponent,
       CategoryComponent,
-      CommonTableComponent,
       CommonModule,
       AnalyticsComponent,
       UserProfileComponent,
       UserFormComponent,
-      UserTableComponent
+      UserTableComponent,
+      ProductTableComponent
     ],
     templateUrl: './admin-dashborad.component.html',
     styleUrl: './admin-dashborad.component.scss',
   })
   export class AdminDashboradComponent implements OnInit {
+ 
     dropDownBol: boolean = false;
     userDropdownBol: boolean = false;
     themeModeBol: boolean = false;
@@ -142,67 +168,20 @@ import { UsersService } from '../../Services/users.service';
         required: true,
       },
     ];
+    productInventoryTable :Product[]= [];
 
     constructor(
       public themeService: ThemeService,
-      public userService : UsersService
-    ) {}
+      public userService : UsersService,
+      public productService:ProductService,
+      private helper: Helper
+    ) {
+      this.productService.getAllProduct().subscribe((productList:Product[])=> {
+        this.productInventoryTable = productList
+      })
+    }
 
     selectedComponent: string = 'user-list';
-    productInventoryTable = {
-      header: [
-        { name: 'Product Name' },
-        { name: 'Product Category' },
-        { name: 'Product Price' },
-        { name: 'Product Quantity' },
-        { name: 'Stock Status' },
-        { name: 'Added Date' },
-        { name: 'Supplier' },
-        { name: 'Settings' },
-      ],
-      tableData: [
-        {
-          'Product Name': { value: 'Laptop' },
-          'Product Category': 'Electronics',
-          'Product Price': { value: 999.99 },
-          'Product Quantity': { value: 10 },
-          'Stock Status': 'In Stock',
-          'Added Date': { value: '2024-03-01' },
-          Supplier: 'TechCorp',
-          Settings: { icon: 'bi bi-gear' },
-        },
-        {
-          'Product Name': { value: 'Smartphone' },
-          'Product Category': 'Electronics',
-          'Product Price': { value: 799.5 },
-          'Product Quantity': { value: 25 },
-          'Stock Status': 'In Stock',
-          'Added Date': { value: '2024-02-20' },
-          Supplier: 'MobileWorld',
-          Settings: { icon: 'bi bi-gear' },
-        },
-        {
-          'Product Name': { value: 'Headphones' },
-          'Product Category': 'Accessories',
-          'Product Price': { value: 199.99 },
-          'Product Quantity': { value: 15 },
-          'Stock Status': 'Out of Stock',
-          'Added Date': { value: '2024-02-28' },
-          Supplier: 'AudioTech',
-          Settings: { icon: 'bi bi-gear', onAction: true },
-        },
-        {
-          'Product Name': { value: 'Smartwatch' },
-          'Product Category': 'Wearables',
-          'Product Price': { value: 299.99 },
-          'Product Quantity': { value: 30 },
-          'Stock Status': 'In Stock',
-          'Added Date': { value: '2024-01-15' },
-          Supplier: 'WearableTech',
-          Settings: { icon: 'bi bi-gear' },
-        },
-      ],
-    };
 
     ngOnInit(): void {
       this.themeService.setTheme(this.themeModeBol);
@@ -255,20 +234,55 @@ import { UsersService } from '../../Services/users.service';
     }
 
     userDetails($event: any) {
-      if($event.type == "edit"){
-        console.log($event)
-        this.userDetailsServiceupdate($event)
+      console.log("$$$$$$$$$$$$$$$$$$ userDetails $$$$$$$$$$$$$$");
+      
+      if ($event.type == "edit") {
+        console.log($event);
+        this.userDetailsServiceupdate($event);
         this.selectedComponent = 'user-form';
-      }else{
-        this.userService.deleteUser($event.data)
+      } else {
+        this.userService.deleteUser($event.data).subscribe({
+          next: (user) => {
+            console.log(user, "from admin content");
+            if (user.success) {
+              this.helper.showMessage(user.message, "success");
+            } else {
+              this.helper.showMessage(user.message, "error");
+            }
+          },
+          error: (err) => {
+            console.error("API Error:", err);
+            const errorMessage = err.error?.message || "Something went wrong!";
+            this.helper.showMessage(errorMessage, "error");
+          }
+        });
       }
     }
-
-    onFormUpdated(event: { updated: boolean, data: any }) {
-      if (event.updated) {
-        this.userDetailsServiceupdate(event.data);
-        this.selectedComponent = "user-list";
-        console.log('User form updated successfully:', event.data);
+    
+    onFormUpdated(event: { updated: boolean, data: any  , fromWhere : boolean}) {
+      console.log("#################### onFormUpdated ##############");
+      
+      let userDetails = event.data 
+      //  jab koi user table se nhi aaygea tab hi 
+      if (!event.fromWhere) {
+        this.userDetailsServiceupdate(userDetails);
+        this.userService.addNewUser(userDetails).subscribe((result)=>{
+          this.userService.getAllUserList().subscribe(api=>{
+            if(result.success){
+              this.helper.showMessage(result.message , "success")
+              this.selectedComponent = "user-list";
+            }else{
+              this.helper.showMessage(result.message, "error");
+            }
+          })
+        })
+      }else{
+        // updateUserData
+        console.log("value is comming from table to edit the data :::" , event)
+        this.userService.updateUserData(userDetails , userDetails.id).subscribe((updatedApiResponse)=>{
+          console.log(updatedApiResponse , "this is from updated api resposnse")
+          this.helper.showMessage("Currently Its Under Maintaince So Please Wait untill we complete this thank you " , "success")
+        })
       }
     }
     userDetailsServiceupdate($event:Object){

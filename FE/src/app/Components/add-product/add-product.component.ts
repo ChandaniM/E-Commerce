@@ -12,7 +12,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 export class AddProductComponent {
   productForm: FormGroup;
 
-  constructor(private productService:ProductService , public fb : FormBuilder){
+  constructor(private productService :ProductService , public fb : FormBuilder){
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
       category: ['', Validators.required],
@@ -55,8 +55,6 @@ export class AddProductComponent {
       alert('Product Submitted Successfully!');
     } else {
       alert('Fill all required fields!');
-
-    
-  }
+    }
   }
 }
