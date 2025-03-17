@@ -17,7 +17,23 @@ const addNewUser = `INSERT INTO users (
     wallet_balance, is_active, role
 )  
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+// Categories
 const getAllCategory = "Select * FROM categories;";
+const addNewCategory = `INSERT INTO categories (main_category_name, name, slug, description, tags, image) VALUES (?, ?, ?, ?, ?, ?);`;
+const deleteCategory = "DELETE FROM categories WHERE id = ?;";
+const updateQuery = `UPDATE categories 
+SET 
+    main_category_name = ?,
+    name = ?,
+    slug = ?,
+    description = ?,
+    tags = ?,
+    image = ?,
+    is_active = ?,
+    updated_at = CURRENT_TIMESTAMP
+WHERE 
+    id = ?;
+`;
 
 module.exports = {
   addNewUser,
@@ -31,4 +47,7 @@ module.exports = {
   getuserProfile,
   getUserList,
   getAllCategory,
+  addNewCategory,
+  deleteCategory,
+  updateQuery,
 };

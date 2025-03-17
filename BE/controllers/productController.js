@@ -114,7 +114,7 @@ const deleteReview = (req, res) => {
 
 const getAllCategory = async (req, res) => {
   try {
-    let resposne = await productService.getAllCategoryService(productReviewId);
+    let resposne = await productService.getAllCategoryService();
     res.status(200).send(resposne);
   } catch (error) {
     res.status(500).send(error);
