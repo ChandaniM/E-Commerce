@@ -17,6 +17,7 @@ const addNewUser = `INSERT INTO users (
     wallet_balance, is_active, role
 )  
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+const getAllCategory = "Select * FROM categories;";
 
 module.exports = {
   addNewUser,
@@ -29,4 +30,5 @@ module.exports = {
   deleteProduct,
   getuserProfile,
   getUserList,
+  getAllCategory,
 };

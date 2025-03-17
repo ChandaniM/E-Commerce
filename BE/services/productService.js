@@ -202,6 +202,25 @@ const getProductReviews = async (id) => {
   };
 };
 
+const getAllCategoryService = () => {
+  return new Promise((resolve, reject) => {
+    connection.query(query.getAllCategory, (err, results) => {
+      if (err) {
+        reject({
+          type: "fail",
+          response: results,
+          error: err,
+        });
+      } else {
+        resolve({
+          type: "success",
+          response: results,
+          error: null,
+        });
+      }
+    });
+  });
+};
 const addProductReview = (id, data) => {};
 module.exports = {
   getAllProductList,
@@ -213,4 +232,5 @@ module.exports = {
   getProductReviews,
   getProductById,
   addProductReview,
+  getAllCategoryService,
 };
