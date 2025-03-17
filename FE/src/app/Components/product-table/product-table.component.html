@@ -1,0 +1,41 @@
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Discounted Price</th>
+        <th>Actual Price</th>
+        <th>Discount %</th>
+        <th>Rating</th>
+        <th>Reviews</th>
+        <th>On Sale</th>
+        <th>Settings</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track product.product_id; let index = $index) {
+        <tr>
+          <td>{{ product.product_id }}</td>
+          <td>{{ product.product_name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.discounted_price }}</td>
+          <td>{{ product.actual_price }}</td>
+          <td>{{ product.discount_percentage }}</td>
+          <td>{{ product.rating }} ({{ product.rating_count }})</td>
+          <td>{{ product.review_title }}</td>
+          <td>{{ product.on_sale ? 'Yes' : 'No' }}</td>
+          <td class="settings-cell">
+            <i (click)="onAction(index)" class="bi bi-gear"></i>
+            @if (selectedRowIndex === index) {
+              <ul>
+                <li (click)="editProduct(product)">Edit Row</li>
+                <li (click)="deleteProduct(product.product_id)">Delete User</li>
+              </ul>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  

@@ -108,7 +108,8 @@
             <ng-template [ngIf]="selectedComponent === 'product-table'">
                 <div>
                     <h3>Product Inventory Table</h3>
-                    <common-table [header]="productInventoryTable.header" [tableData]="productInventoryTable.tableData"></common-table>
+                    <product-table [products]="productInventoryTable"></product-table>
+                    <!-- <common-table [header]="productInventoryTable.header" [tableData]="productInventoryTable.tableData"></common-table> -->
                 </div>
             </ng-template>
 

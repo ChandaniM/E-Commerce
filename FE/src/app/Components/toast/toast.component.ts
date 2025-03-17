@@ -12,7 +12,7 @@ import { ToastService } from '../../Services/toast.service';
 export class ToastComponent {
   toast$: Observable<{ message: string, type: string } | null>;
 
-  constructor(private toastService: ToastService) {
+  constructor(public toastService: ToastService) {
     this.toast$ = this.toastService.toast$.pipe(distinctUntilChanged());
   }
 }
