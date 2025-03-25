@@ -1,0 +1,86 @@
+   <div class="border-0 rounded">
+    <div class="card shadow-lg">
+      <div class="row g-0">
+        <!-- Left Image Section -->
+        <div class="col-md-4 text-center bg-light p-4">
+            @if(profileImage){
+                <img
+                  [src]="profileImage || ''"
+                  alt="Please Select Profile Picture"
+                  class="rounded-circle border shadow-lg mb-3"
+                  style="width: 200px; height: 200px; object-fit: cover;"
+                />
+            }
+            @else{
+                <div class="m-4 missing-profile-image">Please Select Profile Picture</div>
+            }
+          <div>
+            <label class="btn btn-outline-primary">
+              Change Picture
+              <input type="file" hidden (change)="onFileSelected($event)" accept="image/*">
+            </label>
+          </div>
+        </div>
+  
+        <!-- Right Form Section -->
+        <div class="col-md-8 p-4">
+          <h3 class="text-center text-primary">Edit Profile</h3>
+          <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+            <div class="row g-3">
+                <div class="col-md-6">
+                  <label>First Name:</label>
+                  <input type="text" class="form-control" formControlName="first_name">
+                </div>
+                <div class="col-md-6">
+                  <label>Last Name:</label>
+                  <input type="text" class="form-control" formControlName="last_name">
+                </div>
+              <div class="col-md-6">
+                <label>Username:</label>
+                <input type="text" class="form-control" formControlName="username">
+              </div>
+              <div class="col-md-6">
+                <label>Email:</label>
+                <input type="email" class="form-control" formControlName="email">
+              </div>
+              <div class="col-md-6">
+                <label>Password:</label>
+                <input type="password" class="form-control" formControlName="password">
+              </div>
+              <div class="col-md-6">
+                <label>Phone Number:</label>
+                <input type="text" class="form-control" formControlName="phone_number">
+              </div>
+                <div class="col-md-12">
+                  <label>Address:</label>
+                  <textarea type="text" class="form-control" formControlName="address"></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label>State:</label>
+                  <input type="text" class="form-control" formControlName="state">
+                </div>
+              <div class="col-md-6">
+                <label>City:</label>
+                <input type="text" class="form-control" formControlName="city">
+              </div>
+              <div class="col-md-6">
+                <label>Postal Code:</label>
+                <input type="text" class="form-control" formControlName="postal_code">
+              </div>
+              <div class="col-md-6">
+                <label>Role:</label>
+                <input type="text" class="form-control" formControlName="role">
+              </div>
+            </div>
+  
+            <div class="text-center mt-4">
+              <button class="btn btn-success" type="submit" [disabled]="profileForm.invalid">Save</button>
+              <button class="btn btn-danger ms-2" type="button" (click)="clearProfile()">Clear</button>
+              <button class="btn btn-warning ms-2" type="button" (click)="logout()">Logout</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-login',
+  imports: [MatCardModule , MatIconModule , ReactiveFormsModule , MatInputModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -40,7 +44,6 @@ export class LoginComponent {
   }
 
   goToSignUp(){
-    this.router.navigate(['/sign-up']);
-
+    this.router.navigate(['/register']);
   }
 }

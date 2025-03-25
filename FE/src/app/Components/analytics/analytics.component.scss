@@ -1,0 +1,55 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+  
+    .overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+  
+      .chart {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 400px;
+  
+        .card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+          font-weight: bold;
+        }
+  
+        .campaign-details {
+          margin-top: 20px;
+          width: 100%;
+          display: grid;
+          gap: 10px;
+  
+          div {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+  
+            span.green {
+              color: #2ecc71;
+            }
+  
+            span.red {
+              color: #e74c3c;
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,47 @@
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Parent Category Name</th>
+        <th>Category Name</th>
+        <th>Brand</th>
+        <th>Actual Price</th>
+        <th>Discount %</th>
+        <th>Rating</th>
+        <th>On Sale</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th>Settings</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track product.id; let index = $index) {
+        <tr>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.main_category_name }}</td>
+          <td>{{ product.category_name }}</td>
+          <td>{{product.brand}}</td>
+          <td>{{ product.actual_price }}</td>
+          <td>{{ product.discount_price ? product.discount_price : 0 }}%</td>
+          <td>{{ product.rating }}
+            <i class="bi bi-star-fill"></i>
+          </td>
+          <td>{{ product.on_sale ? 'Yes' : 'No' }}</td>
+          <td>{{product.created_at | date:'dd-MM-yyyy' }}</td>
+          <td>{{product.updated_at | date:'dd-MM-yyyy' }}</td>
+          <td class="settings-cell">
+            <i (click)="onAction(index)" class="bi bi-gear"></i>
+            @if (selectedRowIndex === index) {
+              <ul>
+                <li (click)="editProduct(product)">Edit Row</li>
+                <li (click)="deleteProduct(product.id)">Delete User</li>
+              </ul>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  

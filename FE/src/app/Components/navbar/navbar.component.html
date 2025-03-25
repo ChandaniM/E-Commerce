@@ -1,25 +1,19 @@
-<nav class="navbar">
-    <div class="navbar-container">
-      <div class="navbar-logo">
-        <a href="/">
-          <img src="assets/images/brandlogo.png" alt="E-commerce Logo" />
-        </a>
-      </div>
-  
-      <div class="navbar-search">
-        <input
-          type="text"
-          class="search-input"
-          placeholder="Search for products..."
-        />
-        <button class="search-button">Search</button>
-      </div>
-  
-      <div class="navbar-actions">
-        <mat-icon aria-label="User icon" (click)="login()">person</mat-icon>
-        <!-- <button class="login-button">Login</button>
-        <button class="signup-button">Signup</button> -->
-      </div>
+<nav class="navbar navbar-expand-lg bg-light shadow-sm px-3" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/images/brandlogo.png" alt="Brandlogo" height="40">
+    </a>
+    <div class="search-container">
+      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      <button type="submit">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-  </nav>
-  
+    <div>
+      <i class="bi bi-heart fs-4 m-3"></i>
+      <i (click)="cart.toggleCart()" class="bi bi-cart2 fs-4 m-3"></i>
+      <i class="bi bi-person fs-3 m-3"></i>
+    </div>
+  </div>
+</nav>
+<cart-sidebar #cart></cart-sidebar>

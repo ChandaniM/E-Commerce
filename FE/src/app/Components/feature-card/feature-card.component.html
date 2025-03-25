@@ -1,0 +1,12 @@
+<div class="gradient" [ngStyle]="{'background':feature.gradientColor? feature.gradientColor : ''}">
+    <div class="bg-w-card">
+        <span class="tag" *ngIf="feature.tag">{{feature.tagValue}}%</span>
+        <div class="">
+            <img [src]="feature.image" alt="" class="icon">
+        </div>
+        <div class="">
+            <div class="">{{feature.title}}</div>
+            <div class="">{{feature.totalCount}} Items</div>
+        </div>
+    </div>
+</div>

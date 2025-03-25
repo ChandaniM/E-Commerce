@@ -1,64 +1,44 @@
-   <div class="container">
+<div class="login-container">
     <div class="image-section">
-        <img src="/assets/images/login.jpg" alt="Characters" />
+        <img src="/images/login.jpg" alt="Characters" />
     </div>
   
     <div class="form-section">
-      <mat-card>
         <div class="logo">
-          <mat-icon>shopping_cart</mat-icon>
-          <span>Online Store</span>
+            <mat-icon>shopping_cart</mat-icon>
+            <span>Online Store</span>
         </div>
         <h2>Welcome Back</h2>
         <p>Please login to your account</p>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <!-- Username Field -->
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Enter your username" formControlName="username" />
-          </mat-form-field>
-  
-          <!-- Password Field -->
-          <mat-form-field  appearance="outline" class="full-width">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Enter your password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
-            <div mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" class="visible-eye">
-              <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
-            </div>
-          </mat-form-field>
 
-          <div class="forgot-password">
-            <a href="#">Forgot Password?</a>
-          </div>
-  
-          <!-- Login Button -->
-          <button mat-raised-button color="primary" class="login-button" [disabled]="!loginForm.valid">
-            Login
-          </button>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+            <!-- Username Field -->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" formControlName="username" class="input-field" />
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-field">
+                    <input type="password" id="password" placeholder="Enter your password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" class="input" />
+                    <ng-container type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+                        <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <div class="signup">
+                <a (click)="goToSignUp()">Create Account ?</a>
+                <button type="submit" class="login-button" [disabled]="!loginForm.valid">
+                    Login
+                </button>
+            </div>
         </form>
-  
-        <!-- Divider -->
-        <div class="divider">
-          <span>Or Login With</span>
-        </div>
-  
-        <!-- Social Login Buttons -->
-        <div class="social-buttons">
-          <button mat-stroked-button class="google-button">
-            <mat-icon>google</mat-icon>
-            Google
-          </button>
-          <button mat-stroked-button class="facebook-button">
-            <mat-icon>facebook</mat-icon>
-            Facebook
-          </button>
-        </div>
-  
-        <!-- Signup Link -->
-        <div class="signup">
-          Don't have an account? <a  (click)="goToSignUp()" >Signup</a>
-        </div>
-      </mat-card>
     </div>
-  </div>
-  
+</div>

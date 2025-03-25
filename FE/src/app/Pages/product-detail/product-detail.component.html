@@ -1,0 +1,148 @@
+<div class="product-container">
+  <div class="image-wrapper">
+    <img src="/images/bread.png" alt="Product Image" />
+  </div>
+  <div class="product-details">
+    <div class="product-basic-info">
+      <h2>
+        Potato Chips 52g, American Cream & Onion Flavour, Crunchy Chips &
+        Snacks.
+      </h2>
+      <div class="rating"><span>4.5</span> | <span>77708 Ratings</span></div>
+      <p class="price">
+        <span class="old-price">RS: 900</span>
+        <span class="current-price">RS: 555</span>
+        <span class="success-dark-text text-bold">78% Off</span>
+      </p>
+      <p class="description">
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard.
+      </p>
+      <ul class="features">
+        <li>Any Product types that You want - Simple, Configurable</li>
+        <li>Downloadable/Digital Products, Virtual Products</li>
+        <li>Inventory Management with Backordered items</li>
+        <li>Flatlock seams throughout.</li>
+      </ul>
+      <div class="product-options">
+        <span>Weight:</span>
+        <span class="weight-badge">500g</span>
+      </div>
+      <div class="actions">
+        <button mat-stroked-button (click)="BuyNow()">Buy Now</button>
+        <button mat-stroked-button (click)="AddToCart()">Add to Cart</button>
+        <div class="quantity-control">
+          <button (click)="decreaseQuantity()" [disabled]="quantity <= 1">
+            -
+          </button>
+          <input
+            type="number"
+            [(ngModel)]="quantity"
+            min="1"
+            step="1"
+            [max]="maxQuantity"
+            required
+          />
+          <button
+            (click)="increaseQuantity()"
+            [disabled]="quantity >= maxQuantity"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+    <br />
+    <mat-tab-group>
+      <mat-tab label="Details">
+        <div class="tab-content">
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry.
+          </p>
+          <ul class="features">
+            <li>Any Product types that You want - Simple, Configurable</li>
+            <li>Downloadable/Digital Products, Virtual Products</li>
+            <li>Inventory Management with Backordered items</li>
+          </ul>
+        </div>
+      </mat-tab>
+      <mat-tab label="Category">
+        <div class="tab-content">
+          <ul>
+            <li><span>Model:</span> SKU140</li>
+            <li><span>Weight:</span> 500 g</li>
+            <li><span>Dimensions:</span> 35 × 30 × 7 cm</li>
+            <li><span>Color:</span> Black, Pink, Red, White</li>
+            <li><span>Size:</span> 10 X 20</li>
+          </ul>
+        </div>
+      </mat-tab>
+      <mat-tab label="Reviews">
+        <div class="reviews">
+          <div class="review-item">
+            <div class="avatar">
+              <img src="assets/img/user/1.jpg" alt="User" />
+            </div>
+            <div class="review-content">
+              <div class="review-top">
+                <div class="review-name">Mariya Lykra</div>
+                <div class="review-rating">
+                  <i class="gicon gi-star fill"></i>
+                  <i class="gicon gi-star fill"></i>
+                  <i class="gicon gi-star fill"></i>
+                  <i class="gicon gi-star fill"></i>
+                  <i class="gicon gi-star-o"></i>
+                </div>
+              </div>
+              <p>Lorem Ipsum is simply dummy text of the printing industry.</p>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="avatar">
+              <img src="assets/img/user/2.jpg" alt="User" />
+            </div>
+            <div class="review-content">
+              <div class="review-top">
+                <div class="review-name">Moris Willson</div>
+                <div class="review-rating">
+                  <i class="gicon gi-star fill"></i>
+                  <i class="gicon gi-star fill"></i>
+                  <i class="gicon gi-star fill"></i>
+                  <i class="gicon gi-star-o"></i>
+                  <i class="gicon gi-star-o"></i>
+                </div>
+              </div>
+              <p>Lorem Ipsum has been the industry's standard dummy text.</p>
+            </div>
+          </div>
+        </div>
+        <div class="review-form">
+          <h3 class="review-form-title">Add a Review</h3>
+          <form class="review-form-data">
+            <div class="review-rating">
+              <span>Your rating:</span>
+              <i class="gicon gi-star fill"></i>
+              <i class="gicon gi-star fill"></i>
+              <i class="gicon gi-star-o"></i>
+              <i class="gicon gi-star-o"></i>
+              <i class="gicon gi-star-o"></i>
+            </div>
+            <input name="your-name" placeholder="Name" type="text" required />
+            <input
+              name="your-email"
+              placeholder="Email"
+              type="email"
+              required
+            />
+            <textarea
+              name="your-comment"
+              placeholder="Enter Your Comment"
+            ></textarea>
+            <button type="submit" class="form-submit-button">Submit</button>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

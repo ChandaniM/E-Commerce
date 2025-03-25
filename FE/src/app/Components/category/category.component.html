@@ -1,0 +1,118 @@
+<div class="Category">
+    <div class="form">
+        <h4>Add New Category</h4>
+        <form [formGroup]="addCategoryForm" (ngSubmit)="submitCategory()">
+            <div>
+                <div class="">
+                    <label class="">Main Category Name</label>
+                    <input type="text" formControlName="main_category_name"  placeholder="Category Name">
+                </div>
+                <div>
+                    <label for="">Name</label>
+                    <input type="text" formControlName="name"  placeholder="Type Category Name">
+                </div>
+                <div class="">
+                    <label for="">Slug</label>
+                    <input type="text" formControlName="slug" placeholder="Slug">
+                </div>
+                <div class="">
+                    <label for="">Sort Description</label>
+                    <input type="text" formControlName="description" placeholder="Sort Description">
+                </div>
+                <div>
+                    <label for="">Product Tags ( Type and make comma to separate tags )</label>
+                    <input type="text" formControlName="tags"  name="" id="">
+                </div>
+                <div>
+                    <select name="" id="" formControlName="is_active"> 
+                        <option [value]="true">Active</option>
+                        <option [value]="false">Inactive</option>
+                    </select>
+                </div>
+    
+                <button class="add-category-btn" [disabled]="addCategoryForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="table-container">
+        <table id="cat_data_table" class="table dataTable no-footer" aria-describedby="cat_data_table_info">
+            <thead>
+                <tr>
+                    <th class="sorting" tabindex="0" aria-controls="cat_data_table" rowspan="1" colspan="1"
+                        aria-label="Name: activate to sort column ascending" style="width: 109.375px;">Name</th>
+                    <th class="sorting" tabindex="0" aria-controls="cat_data_table" rowspan="1" colspan="1"
+                        aria-label="Main Categories: activate to sort column ascending" style="width: 160.336px;">Main
+                        Categories</th>
+                    <th class="sorting" tabindex="0" aria-controls="cat_data_table" rowspan="1" colspan="1"
+                        aria-label="Product: activate to sort column ascending" style="width: 79.2812px;">Product</th>
+                    <th class="sorting sorting_desc" tabindex="0" aria-controls="cat_data_table" rowspan="1" colspan="1"
+                        aria-label="Status: activate to sort column ascending" style="width: 66.6328px;"
+                        aria-sort="descending">Status</th>
+                    <th class="sorting" tabindex="0" aria-controls="cat_data_table" rowspan="1" colspan="1"
+                        aria-label="Trending: activate to sort column ascending" style="width: 89.5469px;">Trending</th>
+                    <th class="sorting" tabindex="0" aria-controls="cat_data_table" rowspan="1" colspan="1"
+                        aria-label="Action: activate to sort column ascending" style="width: 66.8281px;">Action</th>
+                    <!-- <th class="sorting" tabindex="0" aria-controls="cat_data_table" rowspan="1" colspan="1"
+                        aria-label="Action: activate to sort column ascending" style="width: 66.8281px;">Created at</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                
+                @for (category of categoryArray; track category.id) {
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.main_category_name }}</td>
+                        <td>--</td>
+                        <td [class.active]="category.is_active === 1">
+                            {{ category.is_active === 1 ? 'ACTIVE' : 'INACTIVE' }}
+                        </td>
+                        <td>--</td>
+                        <!-- <td>{{ category.tags }}</td> -->
+                        <!-- <td>
+                            <img [src]="'assets/images/' + category.image" alt="{{ category.name }}" width="50">
+                        </td> -->
+                        <!-- <td>{{ category.created_at }}</td> -->
+                        <td>
+                            <div class="action-dropdown">
+                                <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    data-display="static">
+                                    <span class="sr-only"><i class="bi bi-gear"></i></span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" (click)="edit(category)">Edit</a>
+                                    <a class="dropdown-item" (click)="delete(category.id)">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+               <tr class="even">
+                    <td class="">Sofa seat</td>
+                    <td>
+                        <span class="gi-sub-cat-list">
+                            <span class="gi-sub-cat-tag">Furniture</span>
+                        </span>
+                    </td>
+                    <td>48</td>
+                    <td class="active sorting_1">ACTIVE</td>
+                    <td><span class="badge bg-primary">Medium</span></td>
+                    <td>
+                        <div class="action-dropdown">
+                            <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                data-display="static">
+                                <span class="sr-only"><i class="bi bi-gear"></i></span>
+                            </button>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Edit</a>
+                                <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

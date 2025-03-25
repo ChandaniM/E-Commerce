@@ -1,28 +1,12 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { CartSidebarComponent } from '../cart-sidebar/cart-sidebar.component';
 
 @Component({
   selector: 'navbar',
+  imports: [CartSidebarComponent],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent  implements OnInit , OnChanges  , OnDestroy{
+export class NavbarComponent {
 
-
-  constructor(private router: Router){}
-
-  ngOnInit(): void {
-    
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  }
-
-  ngOnDestroy(): void {
-    
-  }
-
-  login(){
-    this.router.navigate(['login']);
-  }
 }

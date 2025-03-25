@@ -1,0 +1,88 @@
+<form [formGroup]="productForm" (ngSubmit)="submitForm()">
+<div class="add-product">
+    <div class="gi-card-content">
+        <div class="row gi-product-uploads">
+            <div class="col-lg-4 mb-991">
+                <div class="gi-vendor-img-upload">
+                    <div class="gi-vendor-main-img">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type="file" id="product_main" (change)="onFileChange($event)" class="gi-image-upload" accept=".png, .jpg, .jpeg">
+                                <label><i class="bi bi-pencil"></i></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div class="imagePreview">
+                                    <img class="gi-image-preview" src="images/upload-preview.jpg" alt="edit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="gi-vendor-upload-detail">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label">Product name</label>
+                            <input type="text" class="form-control slug-title" formControlName="productName" id="inputEmail4">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Select Categories</label>
+                            <select class="form-control form-select" formControlName="category" (change)="onCategoryChange($event)">
+                                @for (category of selectedCategoryDropdown; track category.label) {
+                                    <optgroup [label]="category.label">
+                                        @for (value of category.value; track value) {
+                                            <option [value]="value">{{ value }}</option>
+                                        }
+                                    </optgroup>
+                                }
+                                <option value="add_new" class="add-category-option">+ Add Categories</option>
+                            </select>
+                            
+                        </div>
+                        <div class="col-md-12">
+                            <label for="Supplier" class="col-12 col-form-label">Supplier</label> 
+                            <div class="col-12">
+                                <input id="Supplier" formControlName="Supplier" name="Supplier" class="form-control here set-Supplier" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Sort Description</label>
+                            <textarea class="form-control" formControlName="description" rows="2"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Price <span>( In RS
+                                    )</span></label>
+                            <input type="number" class="form-control" formControlName="price" id="price1">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Total Stock Quantity</label>
+                            <input type="number" class="form-control" formControlName="quantity"  id="quantity1">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Ful Detail</label>
+                            <textarea class="form-control" formControlName="fullDetail" rows="4"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Product Tags <span>( Type and
+                                    make comma to separate tags )</span></label>
+                                <input type="text" placeholder="" formControlName="tags"  class="form-control">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="on_sale" class="form-check-label me-3">Do you want this product on sale?</label>
+                            <input type="checkbox" id="on_sale" class="form-check-input" formControlName="on_sale">
+                          </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Total Cost</label>
+                            <input type="text" formControlName="total_cost"  class="form-control" readonly />
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="button-submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
