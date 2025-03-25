@@ -37,6 +37,8 @@ router.delete("/products/review/:reviewId", productController.deleteReview);
 
 // Get All Category
 router.get("/category", productController.getAllCategory);
+router.post("/addCategory", productController.addNewCategory);
+router.delete("/deleteCategory/:id", productController.deleteCategory);
 
 // Get products by category
 router.get(
