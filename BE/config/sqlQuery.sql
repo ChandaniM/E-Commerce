@@ -34,3 +34,114 @@ INSERT INTO users (
 ('lisa_clark', 'lisa.clark@example.com', 'hashed_password_8', 'Lisa', 'Clark', '9876543217', 'Italy', 'Rome', '56 Piazza Navona', '00186', '1987-03-30', 'https://example.com/profile/lisa_clark.jpg', 180.00, TRUE, 'vendor'),
 ('mark_lewis', 'mark.lewis@example.com', 'hashed_password_9', 'Mark', 'Lewis', '9876543218', 'Spain', 'Barcelona', '12 La Rambla', '08002', '1994-06-18', 'https://example.com/profile/mark_lewis.jpg', 90.00, TRUE, 'vendor'),
 ('nancy_white', 'nancy.white@example.com', 'hashed_password_10', 'Nancy', 'White', '9876543219', 'Japan', 'Tokyo', '89 Shibuya Crossing', '150-0002', '1996-07-25', 'https://example.com/profile/nancy_white.jpg', 250.00, TRUE, 'customer');
+
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,              
+    product_id INT NOT NULL,           
+    quantity INT NOT NULL DEFAULT 1,   
+    total_price DECIMAL(10,2) NOT NULL, 
+    status ENUM('pending', 'shipped', 'delivered', 'cancelled', 'returned') DEFAULT 'pending',  
+    payment_method ENUM('cash', 'card', 'UPI', 'wallet') DEFAULT 'cash',  
+    payment_status ENUM('pending', 'paid', 'failed', 'refunded') DEFAULT 'pending',  
+    tracking_id VARCHAR(50) UNIQUE NULL,   
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+    shipped_date TIMESTAMP NULL,    
+    delivered_date TIMESTAMP NULL,    
+    cancelled_date TIMESTAMP NULL,   
+    return_date TIMESTAMP NULL,   
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+select * from orders;
+
+-- Total Orders Count
+SELECT COUNT(*) AS total_orders FROM orders;
+-- Total Revenue (Sum of All Orders)
+SELECT SUM(total_price) AS total_revenue FROM orders WHERE payment_status = 'paid';
+
+-- Orders by Status (Pending, Shipped, Delivered, etc.)
+SELECT status, COUNT(*) AS count FROM orders GROUP BY status;
+
+-- Revenue by Payment Method
+SELECT payment_method, SUM(total_price) AS revenue FROM orders WHERE payment_status = 'paid' GROUP BY payment_method;
+
+-- Daily Order Trends (Last 7 Days)
+SELECT DATE(order_date) AS order_day, COUNT(*) AS order_count
+FROM orders
+WHERE order_date >= NOW() - INTERVAL 7 DAY
+GROUP BY order_day
+ORDER BY order_day;
+
+
+-- Monthly Revenue Trend
+SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_revenue
+FROM orders
+WHERE payment_status = 'paid'
+GROUP BY month
+ORDER BY month;
+-- Top 5 Best-Selling Products
+SELECT product_id, COUNT(*) AS total_orders, SUM(quantity) AS total_quantity_sold
+FROM orders
+GROUP BY product_id
+ORDER BY total_quantity_sold DESC
+LIMIT 5;
+
+
+-- Active Users (Users Who Placed Orders)
+SELECT COUNT(DISTINCT user_id) AS active_users FROM orders;
+
+-- Cancelled & Returned Orders Ratio
+SELECT 
+    (COUNT(CASE WHEN status = 'cancelled' THEN 1 END) * 100 / COUNT(*)) AS cancelled_percentage,
+    (COUNT(CASE WHEN status = 'returned' THEN 1 END) * 100 / COUNT(*)) AS returned_percentage
+FROM orders;
+-- Extra: Orders by Users
+SELECT user_id, COUNT(*) AS total_orders 
+FROM orders 
+GROUP BY user_id 
+ORDER BY total_orders DESC 
+LIMIT 10;
+
+
+
+
+INSERT INTO orders (user_id, product_id, quantity, total_price, status, payment_method, payment_status, tracking_id, order_date, shipped_date, delivered_date, cancelled_date, return_date)
+VALUES
+(1, 'P001', 2, 499.98, 'shipped', 'card', 'paid', 'TRK12345', '2025-03-22 10:00:00', '2025-03-23 12:00:00', NULL, NULL, NULL),
+(5, 'P002', 1, 299.99, 'delivered', 'UPI', 'paid', 'TRK12346', '2025-03-20 08:30:00', '2025-03-21 11:00:00', '2025-03-22 14:00:00', NULL, NULL),
+(6, 'P003', 3, 899.97, 'pending', 'cash', 'pending', NULL, '2025-03-24 15:45:00', NULL, NULL, NULL, NULL),
+(7, 'P004', 1, 199.99, 'cancelled', 'wallet', 'refunded', 'TRK12347', '2025-03-19 09:20:00', NULL, NULL, '2025-03-20 16:00:00', NULL),
+(11, 'P005', 2, 599.98, 'returned', 'card', 'refunded', 'TRK12348', '2025-03-18 14:10:00', '2025-03-19 10:30:00', '2025-03-20 13:00:00', NULL, '2025-03-21 18:00:00');
+
+
+SELECT * FROM ECOM.products;
+
+
+
+CREATE TABLE product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    short_title VARCHAR(100),
+    category_id INT NOT NULL,
+    brand VARCHAR(100),
+    sku VARCHAR(50) UNIQUE,
+    discounted_price DECIMAL(10,2),
+    actual_price DECIMAL(10,2) NOT NULL,
+    stock_quantity INT DEFAULT 0,
+    rating FLOAT DEFAULT 0,
+    rating_count INT DEFAULT 0,
+    description TEXT,
+    detail_description TEXT,
+    weight VARCHAR(50),
+    on_sale TINYINT(1) DEFAULT 0,
+    user_id BIGINT,
+    img_link VARCHAR(500),
+    product_link VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -121,6 +121,33 @@ const getAllCategory = async (req, res) => {
   }
 };
 
+const addNewCategory = async (req, res) => {
+  console.log("WELCOME TO CONTROLLER");
+  let data = req.body;
+  try {
+    let response = await productService.addCategoryServices(data);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+const deleteCategory = async (req, res) => {
+  try {
+    let id = req.params["id"];
+    if (!id) {
+      return res.status(400).send({
+        type: "fail",
+        message: "Category ID is required but missing in the request.",
+      });
+    } else {
+      let response = await productService.deleteCategoryServices(id);
+      let status = response.type == "success" ? 200 : 400;
+      res.status(status).send(response);
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 module.exports = {
   getAllProducts,
   addProduct,
@@ -135,4 +162,6 @@ module.exports = {
   getProductReviews,
   deleteReview,
   getAllCategory,
+  addNewCategory,
+  deleteCategory,
 };
