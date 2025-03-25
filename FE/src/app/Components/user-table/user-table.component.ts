@@ -21,9 +21,10 @@ export class UserTableComponent {
   }
 
   fetchData() {
-    this.usersService.getAllUserList().subscribe((userData) => {
-      this.data = userData;
-    })
+    this.usersService.getAllUserList().subscribe({
+      next: (data) =>  this.data = data,
+      error: (err) => console.error('Error:', err)
+    });
   }
 
   onAction(index: number, value: any) {

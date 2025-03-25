@@ -115,3 +115,33 @@ For more information on using the Angular CLI, including detailed command refere
     }
   ]
 https://icons.getbootstrap.com/?q=cart#styling
+
+
+    // async onFormUpdated(event: { updated: boolean; data: any; fromWhere: boolean }) {
+    //   try {
+    //     let userDetails = event.data;
+    
+    //     if (!event.fromWhere) {
+    //       this.userDetailsServiceupdate(userDetails);
+          
+    //       const result = await this.userService.addNewUser(userDetails).toPromise(); // ✅ Await API call
+    //       await this.refreshUserList(); // ✅ Ensure list refresh after API call
+          
+    //       if (result.success) {
+    //         this.helper.showMessage(result.message, "success");
+    //         this.selectedComponent = "user-list";
+    //       } else {
+    //         this.helper.showMessage(result.message, "error");
+    //       }
+    //     } else {
+    //       console.log("Value is coming from table to edit the data :::", event);
+    //       const updatedApiResponse = await this.userService.updateUserData(userDetails, userDetails.id).toPromise();
+    //       console.log(updatedApiResponse, "this is from updated API response");
+    //       this.helper.showMessage("Currently It's Under Maintenance, Please Wait Until We Complete This. Thank You!", "success");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error in onFormUpdated:", error);
+    //     this.helper.showMessage("Something went wrong! Please try again.", "error");
+    //   }
+    // }
+  

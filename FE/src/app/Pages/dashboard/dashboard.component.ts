@@ -69,9 +69,9 @@ export class DashboardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.productService.productWrapper().subscribe((e)=>{
-      this.products.push(...e)
-     console.log(this.products , "check")
-   })
+  //   this.productService.productWrapper().subscribe((e)=>{
+  //     this.products.push(...e)
+  //    console.log(this.products , "check")
+  //  })
   }
 }
