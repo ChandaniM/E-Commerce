@@ -19,4 +19,15 @@ export class Helper {
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   }
+
+  calculateTotalCost(quantity: number, pricePerItem: number): number {
+    return quantity * pricePerItem;
+  }
+  
+  calculateDiscountedCost(quantity: number, pricePerItem: number, discountPercentage: number): number {
+    const totalCost = this.calculateTotalCost(quantity, pricePerItem);
+    const discountAmount = (totalCost * discountPercentage) / 100;
+    return totalCost - discountAmount;
+  }
+
 }

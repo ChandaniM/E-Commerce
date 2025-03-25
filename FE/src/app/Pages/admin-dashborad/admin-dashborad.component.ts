@@ -12,6 +12,7 @@
   import { Helper } from '../../helpers/helper';
 import { ProductTableComponent } from '../../Components/product-table/product-table.component';
 import { ProductService } from '../../Services/product.service';
+import { every, Subscription } from 'rxjs';
 
 
 export interface Product {
@@ -53,9 +54,10 @@ export interface Product {
     styleUrl: './admin-dashborad.component.scss',
   })
   export class AdminDashboradComponent implements OnInit {
- 
-    dropDownBol: boolean = false;
-    userDropdownBol: boolean = false;
+    private productSubscription!: Subscription;
+    private userSubscription!: Subscription;
+    dropDownBol: boolean = true;
+    userDropdownBol: boolean = true;
     themeModeBol: boolean = false;
     dropdownProfileVisible: boolean = false;
     userManagementTable: { header: any[]; tableData: any[] } = {
@@ -63,111 +65,6 @@ export interface Product {
       tableData: [],
     };
 
-    dynamicFields = [
-      { name: 'username', 
-        value : "",
-        label: 'Username', 
-        type: 'text', 
-        required: true 
-      },
-      { name: 'email', 
-        value : "",
-        label: 'Email', 
-        type: 'email', 
-        required: true 
-      },
-      { name: 'password', 
-        value : "",
-        label: 'Password', 
-        type: 'password', 
-        required: true 
-      },
-      { name: 'first_name', 
-        value : "",
-        label: 'First Name', 
-        type: 'text', 
-        required: true 
-      },
-      { name: 'last_name', 
-        value : "",
-        label: 'Last Name', 
-        type: 'text', 
-        required: true 
-      },
-      {
-        name: 'phone_number',
-        value : "",
-        label: 'Phone Number',
-        type: 'text',
-        required: true,
-      },
-      {
-        name: 'country',
-        value : "",
-        label: 'Country',
-        type: 'select',
-        options: ['India', 'USA', 'Canada'],
-        required: true,
-      },
-      { name: 'place', 
-        value : "",
-        label: 'Place', 
-        type: 'text', 
-        required: true 
-      },
-      { name: 'address', 
-        value : "",
-        label: 'Address', 
-        type: 'textarea', 
-        required: true 
-      },
-      {
-        name: 'postal_code',
-        value : "",
-        label: 'Postal Code',
-        type: 'text',
-        required: false,
-      },
-      {
-        name: 'date_of_birth',
-        value : "",
-        label: 'Date of Birth',
-        type: 'date',
-        required: true,
-      },
-      {
-        name: 'profile_picture',
-        value : "",
-        label: 'Profile Picture',
-        type: 'file',
-        required: false,
-      },
-      {
-        name: 'wallet_balance',
-        value : "",
-        label: 'Wallet Balance',
-        type: 'number',
-        required: false,
-        readonly: true,
-        defaultValue: 0.0,
-      },
-      {
-        name: 'is_active',
-        value : "",
-        label: 'Is Active',
-        type: 'checkbox',
-        required: false,
-        defaultValue: true,
-      },
-      {
-        name: 'role',
-        value : "",
-        label: 'Role',
-        type: 'select',
-        options: ['Customer', 'Admin'],
-        required: true,
-      },
-    ];
     productInventoryTable :Product[]= [];
 
     constructor(
@@ -176,21 +73,25 @@ export interface Product {
       public productService:ProductService,
       private helper: Helper
     ) {
-      this.productService.getAllProduct().subscribe((productList:Product[])=> {
-        this.productInventoryTable = productList
-      })
     }
-
-    selectedComponent: string = 'user-list';
-
+    
+    selectedComponent: string = 'add-product';
+    toggleDropdown = true;
     ngOnInit(): void {
       this.themeService.setTheme(this.themeModeBol);
-      console.log(this.themeService.getTheme());
+     this.productSubscription =  this.productService.getAllProduct().subscribe((productList:Product[])=> {
+      this.productInventoryTable = productList
+      })
+      
     }
    
     showComponent(component: string) {
       console.log('Clicked:', component);
       this.selectedComponent = component;
+    }
+
+    drawerSlider(){
+      this.toggleDropdown = ! this.toggleDropdown;
     }
 
     ToggleDropDown() {
@@ -209,38 +110,18 @@ export interface Product {
     toggleProfileDropdown() {
       this.dropdownProfileVisible = !this.dropdownProfileVisible;
     }
-    onFormSubmitted(user: any) {
-      console.log("Form Submitted Data:", user);
-    
-      this.dynamicFields = this.dynamicFields.map(field => {
 
-        let fieldValue = user[field.label]; // user object me label ke hisaab se value dhoondo
-    
-        if (fieldValue) {
-         if (typeof fieldValue === "object" && fieldValue.hasOwnProperty("value")) {
-            fieldValue = fieldValue.value;
-          }
-    
-          return { ...field, value: fieldValue }; // Updated field object
-        }
-        return field; // No change if value doesn't exist
-      });
-    
-      console.log("Updated Dynamic Fields:", this.dynamicFields);
-    }
-    
     userDropdownToggle() {
       this.userDropdownBol = !this.userDropdownBol;
     }
 
     userDetails($event: any) {
-      console.log("$$$$$$$$$$$$$$$$$$ userDetails $$$$$$$$$$$$$$");
-      
       if ($event.type == "edit") {
         console.log($event);
         this.userDetailsServiceupdate($event);
         this.selectedComponent = 'user-form';
       } else {
+        console.log($event.id);
         this.userService.deleteUser($event.data).subscribe({
           next: (user) => {
             console.log(user, "from admin content");
@@ -258,34 +139,58 @@ export interface Product {
         });
       }
     }
+    refreshUserList() {
+        this.userService.getAllUserList().subscribe();
+    }
+
+    onFormUpdated(event: { updated: boolean; data: any; fromWhere: boolean }) {
+      let userDetails = event.data;
     
-    onFormUpdated(event: { updated: boolean, data: any  , fromWhere : boolean}) {
-      console.log("#################### onFormUpdated ##############");
-      
-      let userDetails = event.data 
-      //  jab koi user table se nhi aaygea tab hi 
       if (!event.fromWhere) {
         this.userDetailsServiceupdate(userDetails);
-        this.userService.addNewUser(userDetails).subscribe((result)=>{
-          this.userService.getAllUserList().subscribe(api=>{
-            if(result.success){
-              this.helper.showMessage(result.message , "success")
+    
+        this.userService.addNewUser(userDetails).subscribe({
+          next: (result) => {
+            this.refreshUserList(); // Ensure the user list refreshes after adding
+            if (result.success) {
+              this.helper.showMessage(result.message, "success");
               this.selectedComponent = "user-list";
-            }else{
+            } else {
               this.helper.showMessage(result.message, "error");
             }
-          })
-        })
-      }else{
-        // updateUserData
-        console.log("value is comming from table to edit the data :::" , event)
-        this.userService.updateUserData(userDetails , userDetails.id).subscribe((updatedApiResponse)=>{
-          console.log(updatedApiResponse , "this is from updated api resposnse")
-          this.helper.showMessage("Currently Its Under Maintaince So Please Wait untill we complete this thank you " , "success")
-        })
+          },
+          error: (error) => {
+            console.error("Error in adding user:", error);
+            this.helper.showMessage("Something went wrong! Please try again.", "error");
+          }
+        });
+      } else {
+        // Update User Data
+        console.log("Value is coming from table to edit the data :::", event);
+    
+        this.userService.updateUserData(userDetails, userDetails.id).subscribe({
+          next: (updatedApiResponse) => {
+            console.log(updatedApiResponse, "this is from updated API response");
+            this.helper.showMessage("Currently It's Under Maintenance, Please Wait Until We Complete This. Thank You!", "success");
+          },
+          error: (error) => {
+            console.error("Error in updating user:", error);
+            this.helper.showMessage("Failed to update user. Please try again.", "error");
+          }
+        });
       }
     }
+    
     userDetailsServiceupdate($event:Object){
       this.userService.setUserDetails($event);
+    }
+
+    callByChildren(event:any){
+      this.selectedComponent = event.type
+    }
+
+    ngOnDestroy(): void {
+      if (this.productSubscription) this.productSubscription.unsubscribe();
+      if (this.userSubscription) this.userSubscription.unsubscribe();
     }
   }

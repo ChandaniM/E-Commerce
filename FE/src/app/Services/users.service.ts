@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/addUser.typs';
+import { API_ENDPOINTS } from '../config/api-endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UsersService {
   constructor() { }
 
     getAllUserList(){
-      return this.http.get<Array<any>>(this.apiUrl +`user-list`);
+      return this.http.get<Array<any>>(this.apiUrl + API_ENDPOINTS.USER.GET_ALL);
     }
 
     get userDetails(): Observable<any> {
@@ -26,14 +27,14 @@ export class UsersService {
     }
 
     deleteUser(id:number){
-      return this.http.delete<any>(this.apiUrl + `delete/${id}`);
+      return this.http.delete<any>(this.apiUrl + API_ENDPOINTS.USER.DELETE(id));
     }
 
     addNewUser(userData: User): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl}addUser`, userData);
+      return this.http.post<any>(`${this.apiUrl}${API_ENDPOINTS.USER.ADD_USER}`, userData);
     } 
 
     updateUserData(userData: User , id:number): Observable<any>{
-      return this.http.put<any>(this.apiUrl+`editDetails/${id}` , userData);
+      return this.http.put<any>(this.apiUrl+API_ENDPOINTS.USER.EDIT_USER_BY_ID(id) , userData);
     }
 }

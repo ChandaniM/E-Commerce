@@ -1,59 +1,69 @@
 <div class="admin-dashboard">
-    <div class="left-panel">
-        <div class="logo">
-            <img src="/images/logo.png" alt="">
+    @if(this.toggleDropdown){
+        <div class="left-panel">
+            <div class="logo">
+                <img src="/images/logo.png" alt="">
+            </div>
+            <div class="admin-wrapper">
+                <div class="flex-space-gap">
+                    <i class="bi bi-speedometer2"></i>
+                    <span class="cursor-pointer" (click)="showComponent('dashboard')">Dashboard</span>
+                </div>
+                <div class="flex-space space-between">
+                    <span class="flex-space-gap">
+                        <i class="bi bi-people-fill"></i>
+                        <span class="cursor-pointer">User's</span>
+                    </span>
+                    <span class="cursor-pointer" (click)="userDropdownToggle()">
+                        @if(!userDropdownBol){
+                        <i class="bi bi-chevron-down"></i>
+                        }
+                        @else{
+                        <i class="bi bi-chevron-right"></i>
+                        }
+                    </span>
+    
+                </div>
+                @if(userDropdownBol){
+                <ul>
+                    <li class="cursor-pointer" (click)="showComponent('user-form')">Add User's</li>
+                    <li  class="cursor-pointer" (click)="showComponent('user-list')">User's List </li>
+                </ul>
+                } 
+                <div class="flex-space space-between">
+                    <span class="flex-space-gap ">
+                        <i class="bi bi-cart"></i>
+                        <span>eCommerce</span>
+                    </span>
+                    <span class="cursor-pointer" (click)="ToggleDropDown()">
+                        @if(!dropDownBol){
+                        <i class="bi bi-chevron-down"></i>
+                        }
+                        @else{
+                        <i class="bi bi-chevron-right"></i>
+                        }
+                    </span>
+                </div>
+                @if(dropDownBol){
+                <ul>
+                    <li class="cursor-pointer" (click)="showComponent('product-table')">Product list</li>
+                    <li class="cursor-pointer" (click)="showComponent('add-product')">Add Product</li>
+                    <li class="cursor-pointer" (click)="showComponent('category')">Add Category</li>
+                </ul>
+                }
+            </div>
         </div>
-        <div class="admin-wrapper">
-            <div class="flex-space-gap">
-                <i class="bi bi-speedometer2"></i>
-                <span class="cursor-pointer" (click)="showComponent('dashboard')">Dashboard</span>
-            </div>
-            <div class="flex-space space-between">
-                <span class="flex-space-gap">
-                    <i class="bi bi-people-fill"></i>
-                    <span class="cursor-pointer">User's</span>
-                </span>
-                <span class="cursor-pointer" (click)="userDropdownToggle()">
-                    @if(!userDropdownBol){
-                    <i class="bi bi-chevron-down"></i>
-                    }
-                    @else{
-                    <i class="bi bi-chevron-right"></i>
-                    }
-                </span>
-
-            </div>
-            @if(userDropdownBol){
-            <ul>
-                <li class="cursor-pointer" (click)="showComponent('user-form')">Add User's</li>
-                <li  class="cursor-pointer" (click)="showComponent('user-list')">User's List </li>
-            </ul>
-            } 
-            <div class="flex-space space-between">
-                <span class="flex-space-gap ">
-                    <i class="bi bi-cart"></i>
-                    <span>eCommerce</span>
-                </span>
-                <span class="cursor-pointer" (click)="ToggleDropDown()">
-                    @if(!dropDownBol){
-                    <i class="bi bi-chevron-down"></i>
-                    }
-                    @else{
-                    <i class="bi bi-chevron-right"></i>
-                    }
-                </span>
-            </div>
-            @if(dropDownBol){
-            <ul>
-                <li class="cursor-pointer" (click)="showComponent('product-table')">Product list</li>
-                <li class="cursor-pointer" (click)="showComponent('add-product')">Add Product</li>
-                <li class="cursor-pointer" (click)="showComponent('category')">Add Category</li>
-            </ul>
-            }
-        </div>
-    </div>
-    <div class="right-panel" [ngClass]="{'darkTheme': themeModeBol, 'lightTheme': !themeModeBol}">
+    }
+    <div class="right-panel"  [ngStyle]="{ 'width': toggleDropdown ? '80vw' : '100vw'}" [ngClass]="{'darkTheme': themeModeBol, 'lightTheme': !themeModeBol}">
         <div class="navbar" [ngClass]="{'dark-theme-navbar': themeModeBol, 'lightTheme': !themeModeBol}">
+            <div (click)="drawerSlider()">
+                @if(this.toggleDropdown){
+                    <i class="bi bi-toggle-on fs-2"></i>
+                }
+                @else{
+                    <i class="bi bi-toggle-off fs-2"></i>
+                }
+            </div>
             <div class="search">
                 <input type="text" placeholder="search...">
                 <i class="bi bi-search"></i>
@@ -83,15 +93,12 @@
             <ng-template [ngIf]="selectedComponent == 'user-form'">
                 <div>
                     <user-form (formUpdated)="onFormUpdated($event)"></user-form>
-                    <!-- <app-dynamic-form (formSubmitted)="onFormSubmitted($event)"
-                        [formFields]="dynamicFields" ></app-dynamic-form> -->
                 </div>
             </ng-template>
             <ng-template [ngIf]="selectedComponent == 'user-list'">
                 <div>
                     <h3>User Management Table</h3>
                     <user-table (editUserDetails)="userDetails($event)"></user-table>
-                    <!-- <common-table class="background-white" (editUserDetails)="userDetails($event)" [header]="userManagementTable.header" [tableData]="userManagementTable.tableData"></common-table> -->
                 </div>
             </ng-template>
             <ng-template [ngIf]="selectedComponent == 'user-profile'">
@@ -115,7 +122,7 @@
 
             <ng-template [ngIf]="selectedComponent === 'add-product'">
                 <h5>Add Product</h5>
-                <add-product></add-product>
+                <add-product (callParent)="callByChildren($event)"></add-product>
                 <div class="bg-white flex-space">
                     <div>
                         <span>2025</span>

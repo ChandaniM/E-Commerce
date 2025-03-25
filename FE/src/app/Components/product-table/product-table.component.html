@@ -3,34 +3,40 @@
       <tr>
         <th>Product ID</th>
         <th>Product Name</th>
-        <th>Category</th>
-        <th>Discounted Price</th>
+        <th>Parent Category Name</th>
+        <th>Category Name</th>
+        <th>Brand</th>
         <th>Actual Price</th>
         <th>Discount %</th>
         <th>Rating</th>
-        <th>Reviews</th>
         <th>On Sale</th>
+        <th>Created At</th>
+        <th>Updated At</th>
         <th>Settings</th>
       </tr>
     </thead>
     <tbody>
-      @for (product of products; track product.product_id; let index = $index) {
+      @for (product of products; track product.id; let index = $index) {
         <tr>
-          <td>{{ product.product_id }}</td>
-          <td>{{ product.product_name }}</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.discounted_price }}</td>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.main_category_name }}</td>
+          <td>{{ product.category_name }}</td>
+          <td>{{product.brand}}</td>
           <td>{{ product.actual_price }}</td>
-          <td>{{ product.discount_percentage }}</td>
-          <td>{{ product.rating }} ({{ product.rating_count }})</td>
-          <td>{{ product.review_title }}</td>
+          <td>{{ product.discount_price ? product.discount_price : 0 }}%</td>
+          <td>{{ product.rating }}
+            <i class="bi bi-star-fill"></i>
+          </td>
           <td>{{ product.on_sale ? 'Yes' : 'No' }}</td>
+          <td>{{product.created_at | date:'dd-MM-yyyy' }}</td>
+          <td>{{product.updated_at | date:'dd-MM-yyyy' }}</td>
           <td class="settings-cell">
             <i (click)="onAction(index)" class="bi bi-gear"></i>
             @if (selectedRowIndex === index) {
               <ul>
                 <li (click)="editProduct(product)">Edit Row</li>
-                <li (click)="deleteProduct(product.product_id)">Delete User</li>
+                <li (click)="deleteProduct(product.id)">Delete User</li>
               </ul>
             }
           </td>
