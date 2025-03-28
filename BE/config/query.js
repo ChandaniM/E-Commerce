@@ -14,7 +14,7 @@ VALUES
 //                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
 const getCartListData = "SELECT * FROM cart;";
 const addCartDataInToDb = `INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?);`;
-const productById = `SELECT * FROM products where product_id = ?;`;
+const productById = `SELECT * FROM product where id = ?;`;
 const deleteProduct = `DELETE FROM product WHERE id = ? ;`;
 const getuserProfile = `SELECT * FROM users WHERE id = ?;`;
 const getUserList = "SELECT * FROM users;";
@@ -42,6 +42,13 @@ WHERE
     id = ?;
 `;
 
+const QUERY_COUNT_TABLE = `SELECT 
+    (SELECT COUNT(*) FROM product) AS product_count,
+    (SELECT COUNT(*) FROM orders) AS orders_count,
+    (SELECT COUNT(*) FROM users) AS users_count,
+    (SELECT COUNT(*) FROM categories) AS categories_count,
+    (SELECT COUNT(*) FROM cart) AS cart_count;
+`;
 module.exports = {
   addNewUser,
   getListOfProduct,
@@ -57,4 +64,5 @@ module.exports = {
   addNewCategory,
   deleteCategory,
   updateQuery,
+  QUERY_COUNT_TABLE,
 };

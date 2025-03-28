@@ -1,3 +1,4 @@
+const { response } = require("express");
 let connection = require("../config/dbConnection");
 let query = require("../config/query");
 
@@ -172,7 +173,7 @@ const getProductById = (id) => {
           const response = {
             success: true,
             message: "Successful!",
-            product: results,
+            response: results,
           };
 
           resolve(response);
