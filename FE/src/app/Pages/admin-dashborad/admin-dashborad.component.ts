@@ -187,6 +187,7 @@ export class AdminDashboradComponent implements OnInit {
             'error'
           );
         },
+        
       });
     }
   }
