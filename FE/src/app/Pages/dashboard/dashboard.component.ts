@@ -8,14 +8,19 @@ import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardComponent, CarouselComponent, CommonModule, FeatureCardComponent],
+  imports: [
+    CardComponent, 
+    CarouselComponent, 
+    CommonModule, 
+    FeatureCardComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
   productService = inject(ProductService)
   
-  products :Product[] = [
+  products :any[] = [
   ];
   categoryProduct = [
     {
@@ -69,9 +74,18 @@ export class DashboardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-  //   this.productService.productWrapper().subscribe((e)=>{
-  //     this.products.push(...e)
-  //    console.log(this.products , "check")
-  //  })
+    this.productService.productWrapper().subscribe({
+      next: (res) => {
+        this.products = [...res];
+      },
+      error: (err) => {
+        console.error('Error while fetching products:', err);
+      },
+      complete: () => {
+        console.log('Product fetching completed.');
+      }
+    });
+    
   }
+  
 }

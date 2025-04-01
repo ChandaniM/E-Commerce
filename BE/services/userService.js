@@ -85,14 +85,14 @@ const loginUser = (username, password) => {
             let passwordresult = results[0].password.toLowerCase();
             if (passwordresult === password.toLowerCase()) {
               const response = {
-                success: true,
+                type: "success",
                 message: "User login successful!",
                 user: results,
               };
               resolve(response);
             } else {
               reject({
-                success: false,
+                type: "error",
                 message: "Incorrect password.",
               });
             }

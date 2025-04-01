@@ -13,7 +13,7 @@ export const routes: Routes = [
         loadComponent : () => { return import('./Pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)}
     },
     {
-        path : "product-details",
+        path : "products/:id",
         loadComponent :  () => { return import('./Pages/product-detail/product-detail.component').then(m=>m.ProductDetailComponent)}
     },
     {
@@ -38,8 +38,6 @@ export const routes: Routes = [
     },
     {
         path : "user-profile",
-        loadComponent  :()=> { return import('./Components/user-profile/user-profile.component').then(m=>m.UserProfileComponent)},
-        data: { isAdmin: true }
-
+        loadComponent  :()=> { return import('./Components/user-profile/user-profile.component').then(m=>m.UserProfileComponent)}
     }
 ];

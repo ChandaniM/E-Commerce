@@ -74,63 +74,83 @@
         </form>
     </div>
 </div> -->
-
 <div class="checkout-container">
-    <!-- Stepper Navigation -->
-    <div class="stepper">
-      <div [class.active]="currentStep === 1">1. Address</div>
-      <div [class.active]="currentStep === 2">2. Order Summary</div>
-      <div [class.active]="currentStep === 3">3. Payment</div>
-    </div>
-  
-    <!-- Dynamic Content Rendering -->
-    <div class="checkout-content">
-      <ng-container *ngIf="currentStep === 1">
-        <ng-template #addressStep>
-          <h3>Shipping Information</h3>
-          <form>
-            <input type="text" placeholder="Full Name" [(ngModel)]="address.fullName">
-            <input type="email" placeholder="Email" [(ngModel)]="address.email">
-            <input type="tel" placeholder="Phone Number" [(ngModel)]="address.phone">
-            <input type="text" placeholder="City" [(ngModel)]="address.city">
-            <input type="text" placeholder="State" [(ngModel)]="address.state">
-            <input type="text" placeholder="ZIP Code" [(ngModel)]="address.zip">
-          </form>
-        </ng-template>
-        <ng-container *ngTemplateOutlet="addressStep"></ng-container>
-      </ng-container>
-  
-      <ng-container *ngIf="currentStep === 2">
-        <ng-template #orderSummaryStep>
-          <h3>Order Summary</h3>
-          <ul>
-            <li *ngFor="let item of items">
-              {{ item.name }} - ${{ item.price }}
-            </li>
-          </ul>
-          <p><strong>Total:</strong> ${{ getTotal() }}</p>
-        </ng-template>
-        <ng-container *ngTemplateOutlet="orderSummaryStep"></ng-container>
-      </ng-container>
-  
-      <ng-container *ngIf="currentStep === 3">
-        <ng-template #paymentStep>
-          <h3>Payment Method</h3>
-          <form>
-            <input type="text" placeholder="Card Number" [(ngModel)]="card.number">
-            <input type="text" placeholder="Expiry Date (MM/YY)" [(ngModel)]="card.expiry">
-            <input type="text" placeholder="CVV" [(ngModel)]="card.cvv">
-          </form>
-        </ng-template>
-        <ng-container *ngTemplateOutlet="paymentStep"></ng-container>
-      </ng-container>
-    </div>
-  
-    <!-- Navigation Buttons -->
-    <div class="checkout-actions">
-      <button (click)="prevStep()" [disabled]="currentStep === 1">Back</button>
-      <button (click)="nextStep()" *ngIf="currentStep < 3">Next</button>
-      <button *ngIf="currentStep === 3">Confirm & Pay</button>
-    </div>
+  <!-- Stepper Navigation -->
+  <div class="stepper">
+    <div [class.active]="currentStep === 1">1. Address</div>
+    <div [class.active]="currentStep === 2">2. Order Summary</div>
+    <div [class.active]="currentStep === 3">3. Payment</div>
   </div>
+
+  <!-- Dynamic Content Rendering -->
+  <div class="checkout-content">
+    <ng-container *ngIf="!isAddressSaved && currentStep === 1">
+      <h3>Shipping Information</h3>
+      <form [formGroup]="addressForm">
+        <input type="text" placeholder="Full Name" formControlName="fullName">
+        <input type="email" placeholder="Email" formControlName="email">
+        <input type="tel" placeholder="Phone Number" formControlName="phone">
+        <input type="text" placeholder="City" formControlName="city">
+        <input type="text" placeholder="State" formControlName="state">
+        <input type="text" placeholder="ZIP Code" formControlName="zip">
+        <button class="btn save" (click)="saveAddress()" [disabled]="!addressForm.valid">Save Address</button>
+      </form>
+    </ng-container>
+    @if(isAddressSaved && currentStep === 1){
+      <ng-container>
+        <h3>Shipping Address</h3>
+        <p><strong>Name:</strong> {{ savedAddress?.fullName }}</p>
+        <p><strong>Email:</strong> {{ savedAddress?.email }}</p>
+        <p><strong>Phone:</strong> {{ savedAddress?.phone }}</p>
+        <p><strong>City:</strong> {{ savedAddress?.city }}</p>
+        <p><strong>State:</strong> {{ savedAddress?.state }}</p>
+        <p><strong>ZIP Code:</strong> {{ savedAddress?.zip }}</p>
+        <button class="edit btn" (click)="editAddress()">Edit Address</button>
+      </ng-container>
+    }
+    <ng-container *ngIf="currentStep === 2">
+      <h3>Order Summary</h3>
+      @if(checkoutForm.get('orderSummary')?.value.items.length > 0 ){
+        <ul>
+          <li *ngFor="let item of checkoutForm.get('orderSummary')?.value.items || []">
+  
+            {{ item.name }} - RS: {{ item.price }} (Qty: {{ item.quantity }})
+            <i class="bi bi-trash" (click)="trash(item.id)"></i>
+          </li>
+        </ul>
+        <p><strong>Total:</strong> RS : {{ getTotal() }}</p>
+      }
+      @else{
+        <p>🛒 Your cart is empty! Time to fill it with delicious goodies.</p>
+      }
+    </ng-container>
+
+    <ng-container *ngIf="currentStep === 3">
+      <h3>Payment Method</h3>
+      <form [formGroup]="paymentForm">
+        <input type="text"
+       maxlength="19" 
+       [value]="paymentForm.get('cardNumber')?.value" 
+       (input)="onCardInput($event)" 
+       placeholder="1234 5678 9012 3456"
+       formControlName="cardNumber">
+
+        <input type="text" placeholder="Expiry Date (MM/YY)" formControlName="expiry">
+        <input type="text" maxlength="3" placeholder="CVV" formControlName="cvv">
+      </form>
+    </ng-container>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="checkout-actions">
+    <button (click)="prevStep()" [disabled]="currentStep === 1">Back</button>
+    <button (click)="nextStep()" *ngIf="currentStep < 3" [disabled]=" currentStep == 2 &&  checkoutForm.get('orderSummary')?.value.items.length == 0" >Next</button>
+    <button (click)="onSubmit()" *ngIf="currentStep === 3" [disabled]="!isFormValid">
+      Confirm & Pay
+    </button>
+    
+  </div>
+</div>
+
+
   

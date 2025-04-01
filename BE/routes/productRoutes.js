@@ -32,6 +32,12 @@ router.put("/products/:id", productController.updateProduct);
 // Delete a product (Admin) -- Done
 router.delete("/products/:id", productController.deleteProduct);
 
+// router
+//   .route("/products/:id")
+//   .get(productController.getProductById)
+//   .put(checkAdmin, checkProductId, productController.updateProduct)
+//   .delete(productController.deleteProduct);
+
 // Delete a review (Admin/User) -- Done
 router.delete("/products/review/:reviewId", productController.deleteReview);
 

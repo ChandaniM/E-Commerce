@@ -12,7 +12,7 @@ app.use(cors());
 app.use(analyticsRoutes);
 app.use(userRoutes);
 app.use(productRoutes);
-
+ 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });

@@ -5,32 +5,35 @@
   <div class="product-details">
     <div class="product-basic-info">
       <h2>
-        Potato Chips 52g, American Cream & Onion Flavour, Crunchy Chips &
-        Snacks.
+       {{product.name}}
       </h2>
-      <div class="rating"><span>4.5</span> | <span>77708 Ratings</span></div>
+      <div class="rating"><span >{{ product.rating == 0 ? '' : product.rating }}</span> <span> {{ product.rating_count == 0 ? '' :  '|' + product.rating_count + ' Ratings' }}</span></div>
       <p class="price">
-        <span class="old-price">RS: 900</span>
-        <span class="current-price">RS: 555</span>
-        <span class="success-dark-text text-bold">78% Off</span>
+        <span class="old-price">RS: {{product?.actual_price }}</span>
+        <span class="current-price">RS: {{product?.discount_price }}</span>
+        <span class="success-dark-text text-bold">
+          {{ product.discount_percentage == null ? '' : product.discount_percentage + ' % Off' }}
+        </span>
+        
       </p>
       <p class="description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard.
+      {{product.detail_description}}
       </p>
       <ul class="features">
-        <li>Any Product types that You want - Simple, Configurable</li>
+        <li><b>Brand : {{product.brand}}</b></li>
         <li>Downloadable/Digital Products, Virtual Products</li>
         <li>Inventory Management with Backordered items</li>
         <li>Flatlock seams throughout.</li>
       </ul>
       <div class="product-options">
-        <span>Weight:</span>
-        <span class="weight-badge">500g</span>
+        @if(product.weight != null){
+          <span>Weight:</span>
+          <span class="weight-badge">{{product.weight}}g</span>
+        }
       </div>
       <div class="actions">
-        <button mat-stroked-button (click)="BuyNow()">Buy Now</button>
-        <button mat-stroked-button (click)="AddToCart()">Add to Cart</button>
+        <button mat-stroked-button (click)="BuyNow(product ,quantity)">Buy Now</button>
+        <button mat-stroked-button (click)="AddToCart(product , quantity)">Add to Cart</button>
         <div class="quantity-control">
           <button (click)="decreaseQuantity()" [disabled]="quantity <= 1">
             -

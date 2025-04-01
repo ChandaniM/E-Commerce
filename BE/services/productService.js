@@ -358,7 +358,8 @@ const deleteCategoryServices = async (id) => {
   }
 };
 
-const executeQuery = (sql, params) => {
+const executeQuery = async (sql, params) => {
+  // backfilling
   return new Promise((resolve, reject) => {
     connection.query(sql, params, (err, results) => {
       if (err) {
@@ -368,6 +369,7 @@ const executeQuery = (sql, params) => {
       }
     });
   });
+  // await connection.query(sql, params);
 };
 
 module.exports = {

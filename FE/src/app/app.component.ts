@@ -15,9 +15,10 @@ import { ToastComponent } from './Components/toast/toast.component';
 export class AppComponent implements OnInit{
   title = 'FE';
   themeMode : string = ""
-  isAdmin : boolean = true;
+  isAdmin : boolean = false;
 
   ngOnInit(): void {
+    this.isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
     this.themeMode  = environment.themeMode 
   }
 }

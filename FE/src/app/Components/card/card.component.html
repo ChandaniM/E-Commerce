@@ -9,10 +9,10 @@
     class="product-image"
     [ngClass]="{ imageWidth: product.features.cardWidth }"
   >
-    <img
-      [src]="product.image.length > 0 ? product.image : '/images/brandlogo.png'"
-      alt="{{ product.name }}"
-    />
+  <img
+  [src]="product.img_link ? product.img_link : '/images/brandlogo.png'"
+  alt="{{ product.name }}"
+/>
   </div>
 
   <div class="product-info">
@@ -21,7 +21,7 @@
       [ngClass]="{
         'text-center': product.features.titleAlignment === 'center'
       }"
-      routerLink="/product-details"
+     (click)="openDetails(product.id)"
     >
       {{ product.name }}
     </h4>
