@@ -35,6 +35,17 @@ INSERT INTO users (
 ('mark_lewis', 'mark.lewis@example.com', 'hashed_password_9', 'Mark', 'Lewis', '9876543218', 'Spain', 'Barcelona', '12 La Rambla', '08002', '1994-06-18', 'https://example.com/profile/mark_lewis.jpg', 90.00, TRUE, 'vendor'),
 ('nancy_white', 'nancy.white@example.com', 'hashed_password_10', 'Nancy', 'White', '9876543219', 'Japan', 'Tokyo', '89 Shibuya Crossing', '150-0002', '1996-07-25', 'https://example.com/profile/nancy_white.jpg', 250.00, TRUE, 'customer');
 
+DELETE FROM products WHERE product_id IN ('B09VCHLSJF', 'B09TT6BFDX' , 'B09T3KB6JZ' , 'B09SB6SJB4','B09RX1FK54' , 'B09RZS1NQT');
+ 
+CREATE TABLE cart (
+    cart_id VARCHAR(50) PRIMARY KEY,          -- Unique Cart Item ID
+    user_id BIGINT NOT NULL,                  -- FK from `users.id`
+    product_id VARCHAR(50) NOT NULL,          -- FK from `products.product_id`
+    quantity INT DEFAULT 1 CHECK (quantity > 0),  -- Quantity should be at least 1
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp for tracking
+    CONSTRAINT fk_cart_product FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE,
+    CONSTRAINT fk_cart_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- Changed `user_id` to `id`
+);
 
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,

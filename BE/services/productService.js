@@ -3,6 +3,7 @@ let connection = require("../config/dbConnection");
 let query = require("../config/query");
 
 const getAllProductList = async () => {
+  //  callback method
   return new Promise((resolve, reject) => {
     connection.query(query.getListOfProduct, async (err, results) => {
       if (err) {
@@ -375,6 +376,7 @@ const executeQuery = async (sql, params) => {
 module.exports = {
   getAllProductList,
   addToCart,
+  // getCartList,
   addToWishlist,
   updateProduct,
   deleteProduct,
