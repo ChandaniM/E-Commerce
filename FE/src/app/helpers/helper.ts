@@ -30,4 +30,7 @@ export class Helper {
     return totalCost - discountAmount;
   }
 
+  refreshPage() {
+    window.location.reload();
+  }
 }

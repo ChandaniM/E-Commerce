@@ -1,10 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CarouselComponent } from '../../Components/carousel/carousel.component';
 import { CardComponent } from '../../Components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { FeatureCardComponent } from '../../Components/feature-card/feature-card.component';
-import { Product } from '../../model/product.type';
 import { ProductService } from '../../Services/product.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +17,10 @@ import { ProductService } from '../../Services/product.service';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit  , OnDestroy{
   productService = inject(ProductService)
-  
+  isAdmin : boolean = false;
+  productSubscription = new Subscription;
   products :any[] = [
   ];
   categoryProduct = [
@@ -74,18 +75,25 @@ export class DashboardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.productService.productWrapper().subscribe({
-      next: (res) => {
-        this.products = [...res];
-      },
-      error: (err) => {
-        console.error('Error while fetching products:', err);
-      },
-      complete: () => {
-        console.log('Product fetching completed.');
-      }
-    });
-    
+   this.isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
+   if(!this.isAdmin){
+     this.productSubscription = this.productService.productWrapper().subscribe({
+       next: (res) => {
+         this.products = [...res];
+       },
+       error: (err) => {
+         console.error('Error while fetching products:', err);
+       },
+       complete: () => {
+         console.log('Product fetching completed.');
+       }
+     });
+   }
+  }
+
+  ngOnDestroy(): void {
+    this.productSubscription.unsubscribe()
+    console.log("unsubscribe from user dashboard")
   }
   
 }

@@ -1,11 +1,10 @@
 @if (!isAdmin) {
 <navbar></navbar>
-<router-outlet></router-outlet>
 <footer></footer>
-<app-toast></app-toast>
 }
-@else {
+
+@if(isAdmin){
 <admin-dashborad></admin-dashborad>
+}
 <app-toast></app-toast>
 <router-outlet></router-outlet>
-}

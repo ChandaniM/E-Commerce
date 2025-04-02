@@ -35,11 +35,16 @@ export class CategoryComponent implements OnInit, OnChanges, OnDestroy {
     })
   }
   getAllCategory() {
-    this.categorySubscription = this.categoryServices.getAllCategory().subscribe((category) => {
-      if (category.type == "success") {
-        this.categoryArray = [...category.response];
+    this.categorySubscription = this.categoryServices.getAllCategory().subscribe({
+      next : (category) => {
+        if (category.type == "success") {
+          this.categoryArray = [...category.response];
+        }
+      },
+      error: (err) => {
+        console.error("API Error:", err);
       }
-    })
+  })
     console.log(this.categoryArray, 'category')
   }
 

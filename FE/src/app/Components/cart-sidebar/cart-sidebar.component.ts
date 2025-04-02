@@ -47,7 +47,7 @@ export class CartSidebarComponent implements OnInit, OnDestroy {
   }
 
   getSubTotal(): number {
-    return this.cartItems.reduce((sum, item) => sum + Number(item.discount_price || 0), 0);
+    return this.cartItems.reduce((sum, item) => sum + Number((item.discount_price * item.quantity) || 0), 0);
   }
 
   getTotal(): number {

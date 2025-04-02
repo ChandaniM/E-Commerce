@@ -33,11 +33,13 @@ export class LoginComponent {
       this.loginService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
           if (response.type === 'success') {
+            debugger
             const isAdmin = response.user.some((user: any) => user.role === 'admin');
             localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
-            this.helper.showMessage(response.message, "success");
             localStorage.setItem("isLogin" , JSON.stringify(true));
+            this.helper.showMessage(response.message, "success");
             this.route.navigate(['']);
+            this.helper.refreshPage()
           }
         },
         error: (err) => {

@@ -9,12 +9,7 @@
       <img src="/images/orange-juice.png" alt="Fresh Lichi" />
       <div class="cart-item-details">
         <h4>{{ cart.name }}</h4>
-        <span class="span-cart">{{ cart.discount_price }} x 1 kg</span>
-        <div class="quantity-control">
-          <button class="qty-btn">-</button>
-          <input type="text" value="1" />
-          <button class="qty-btn">+</button>
-        </div>
+        <span class="span-cart">{{ cart.discount_price }} x {{cart.quantity}} items</span>
       </div>
       <button class="remove-btn" (click)="removeItem(cart.id)">&times;</button>
     </div>
@@ -26,13 +21,13 @@
   <div class="cart-footer">
     <div class="cart-total">
       <p>
-        Sub-Total: <span>{{ getSubTotal() | currency : "INR" }}</span>
+        Sub-Total: <span>{{ getSubTotal() | currency: 'INR' }}</span>
       </p>
       <p>
-        VAT (10%): <span>{{ getSubTotal() * 0.1 | currency : "INR" }}</span>
+        VAT (10%): <span>{{ getSubTotal() * 0.1 | currency: 'INR' }}</span>
       </p>
       <p class="total">
-        Total: <span>{{ getTotal() | currency : "INR" }}</span>
+        Total: <span>{{ getTotal() | currency: 'INR' }}</span>
       </p>
     </div>
     <div class="cart-actions">

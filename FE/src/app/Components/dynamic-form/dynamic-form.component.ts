@@ -16,12 +16,6 @@ export class DynamicFormComponent {
     @Output() formSubmitted = new EventEmitter<any>();
     constructor(private fb: FormBuilder , private mapperService : ResponseMapperServiceService) {}
     ngOnInit() {
-      // this.mapperService.userDetailsSub.subscribe(userDetails => {
-      //   if (userDetails) {
-      //     this.patchFormValues(userDetails);
-      //   }
-      // });
-  
       this.createForm();
     }
   

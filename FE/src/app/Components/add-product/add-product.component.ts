@@ -44,24 +44,34 @@ export class AddProductComponent implements OnInit , OnDestroy {
   }
  selectedCategoryDropdown: { label: any; value : any }[] = []
   getCategorydropdownValue(){
-    this.categorySubscription = this.categoryService.getAllCategory().subscribe(category=>{
-      const categoryMap = category.response.reduce((acc: any, e: any) => {
-        if (!acc[e.main_category_name]) {
-          acc[e.main_category_name] = {
-            label: e.main_category_name,
-            value: [e.name], 
-          };
-        } else {
-          acc[e.main_category_name].value.push(e.name);
-        }
-        return acc;
-      }, {});
-      
-      this.selectedCategoryDropdown = Object.values(categoryMap);
-      console.log(this.selectedCategoryDropdown, "selectedCategoryDropdown");
-        this.categoryArray = category.response
-    })
-    console.log(this.selectedCategoryDropdown , "selectedCategoryDropdown")
+  this.categorySubscription = this.categoryService.getAllCategory().subscribe({
+      next: (category) => {
+        const categoryMap = category.response.reduce((acc: any, e: any) => {
+          if (!acc[e.main_category_name]) {
+            acc[e.main_category_name] = {
+              label: e.main_category_name,
+              value: [e.name], 
+            };
+          } else {
+            acc[e.main_category_name].value.push(e.name);
+          }
+          return acc;
+        }, {});
+        
+        this.selectedCategoryDropdown = Object.values(categoryMap);
+        console.log(this.selectedCategoryDropdown, "selectedCategoryDropdown");
+        this.categoryArray = category.response;
+      },
+      error: (err) => {
+        console.error("Error fetching categories:", err);
+      },
+      complete: () => {
+        console.log("Category fetching complete.");
+      }
+    });
+    
+    console.log(this.selectedCategoryDropdown, "selectedCategoryDropdown");
+    
   }
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -116,8 +126,8 @@ export class AddProductComponent implements OnInit , OnDestroy {
   
     console.log("Submitting Product:", submitProduct);
   
-    this.productService.addProduct(submitProduct).subscribe(
-      (response: any) => {
+    this.productService.addProduct(submitProduct).subscribe({
+      next:  (response: any) => {
         console.log("Product added successfully:", response);
         this.productService.getAllProduct().subscribe((product:any)=>{
           this.helper.showMessage(response.message , response.type == "success" ? response.type : "error" );
@@ -125,54 +135,13 @@ export class AddProductComponent implements OnInit , OnDestroy {
           alert("Product Submitted Successfully!");
         })
       },
-      (error) => {
+      error:  (error) => {
         console.error("Error submitting product:", error);
         alert("Failed to submit product. Please try again.");
       }
+    }
     );
   }
-
-  
-  // submitForm() {
-  //   let categoryName = this.productForm.get("category")?.value?.trim();
-  //   let category = this.getCategoryByName(categoryName);
-  //   debugger
-  //   console.log(this.productForm.value.quantity , this.productForm.value.price);
-  //   let totalcost =  this.getTotalCost(this.productForm.value.quantity, this.productForm.value.price)
-  //   this.productForm.patchValue({
-  //     total_cost : this.getFormattedCurrency(totalcost)
-  //   });
-
-  //   if (this.productForm.valid) {
-  //     console.log('Form Data:', this.productForm.value);
-  //     let submitProduct = {
-  //       "name": this.productForm.value.productName,
-  //       "short_title": this.productForm.value.description,
-  //       "category_id": category ? category.id : null, 
-  //       "brand": this.productForm.value.Supplier,
-  //       "sku": `${this.productForm.value.productName}-${this.productForm.value.brand}`,
-  //       "actual_price": this.productForm.value.price,
-  //       "stock_quantity": this.productForm.value.quantity,  
-  //       "description": this.productForm.value.description,
-  //       "detail_description": this.productForm.value.fullDetail,
-  //       "user_id": 5,  
-  //       "img_link":this.productForm.value.profileImage,
-  //       "product_link": this.productForm.value.profileImage,
-  //       "on_sale": this.productForm.value.on_sale ? 1 : 0 , 
-  //       "discount_percentage": 0,
-  //     }
-  //     console.log(submitProduct,'submirt');
-      
-  //     debugger
-  //     this.productService.addProduct(submitProduct).subscribe((value:any)=>{
-  //       debugger
-  //       console.log(value)
-  //     })
-  //     alert('Product Submitted Successfully!');
-  //   } else {
-  //     alert('Fill all required fields!');
-  //   }
-  // }
 
   onCategoryChange(event: any) {
     if (event.target.value === "add_new") {

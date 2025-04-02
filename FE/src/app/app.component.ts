@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { FooterComponent } from './Components/footer/footer.component';
@@ -12,13 +12,15 @@ import { ToastComponent } from './Components/toast/toast.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit , OnChanges {
   title = 'FE';
   themeMode : string = ""
-  isAdmin : boolean = false;
-
+  isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
   ngOnInit(): void {
     this.isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
-    this.themeMode  = environment.themeMode 
+    this.themeMode  = environment.themeMode ;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
   }
 }

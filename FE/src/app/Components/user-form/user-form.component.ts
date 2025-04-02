@@ -22,7 +22,8 @@ export class UserFormComponent {
   }
 
   patchValueForm() {
-    this.userService.userDetails.subscribe((response) => {
+    this.userService.userDetails.subscribe({
+      next: (response) => {
       console.log(response)
       let fromFeilds = response.data;
       this.isFormComeFromEditValue = response.type == "edit" ? true :false 
@@ -32,7 +33,11 @@ export class UserFormComponent {
       if (fromFeilds && response.type == "edit") {
         this.patchValue(fromFeilds)
       }
-    });
+    },
+    error : (err) =>{
+      console.error(err)
+    }
+  });
   }
 
   patchValue(value: any) {
