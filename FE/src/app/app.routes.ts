@@ -1,16 +1,10 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './Pages/dashboard/dashboard.component';
-import { ProductDetailComponent } from './Pages/product-detail/product-detail.component';
-import { LoginComponent } from './Components/login/login.component';
-import { RegisterComponent } from './Components/register/register.component';
-import { CheckoutComponent } from './Pages/checkout/checkout.component';
-import { CartComponent } from './Pages/cart/cart.component';
-import { WishlistComponent } from './Pages/wishlist/wishlist.component';
-
+const isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
+const isLogin = JSON.parse(localStorage.getItem('isLogin') || "false");
 export const routes: Routes = [
     {
         path : "",
-        loadComponent : () => { return import('./Pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)}
+        loadComponent : () => { return !isAdmin  ?  import('./Pages/dashboard/dashboard.component').then(m=>m.DashboardComponent) : import('./Pages/admin-dashborad/admin-dashborad.component').then(m=>m.AdminDashboradComponent)}
     },
     {
         path : "products/:id",
