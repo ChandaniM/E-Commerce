@@ -1,3 +1,4 @@
+const { response } = require("express");
 let connection = require("../config/dbConnection");
 let query = require("../config/query");
 
@@ -173,7 +174,7 @@ const getProductById = (id) => {
           const response = {
             success: true,
             message: "Successful!",
-            product: results,
+            response: results,
           };
 
           resolve(response);
@@ -358,7 +359,8 @@ const deleteCategoryServices = async (id) => {
   }
 };
 
-const executeQuery = (sql, params) => {
+const executeQuery = async (sql, params) => {
+  // backfilling
   return new Promise((resolve, reject) => {
     connection.query(sql, params, (err, results) => {
       if (err) {
@@ -368,6 +370,7 @@ const executeQuery = (sql, params) => {
       }
     });
   });
+  // await connection.query(sql, params);
 };
 
 module.exports = {

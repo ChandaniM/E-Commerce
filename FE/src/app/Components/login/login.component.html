@@ -23,9 +23,9 @@
                 <label for="password">Password</label>
                 <div class="input-field">
                     <input type="password" id="password" placeholder="Enter your password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" class="input" />
-                    <ng-container type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+                    <div type="button" class="toggle-password" (click)="togglePasswordVisibility()">
                         <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
-                    </ng-container>
+                    </div>
                 </div>
             </div>
 

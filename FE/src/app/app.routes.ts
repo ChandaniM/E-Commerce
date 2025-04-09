@@ -1,19 +1,19 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './Pages/dashboard/dashboard.component';
-import { ProductDetailComponent } from './Pages/product-detail/product-detail.component';
-import { LoginComponent } from './Components/login/login.component';
-import { RegisterComponent } from './Components/register/register.component';
-import { CheckoutComponent } from './Pages/checkout/checkout.component';
-import { CartComponent } from './Pages/cart/cart.component';
-import { WishlistComponent } from './Pages/wishlist/wishlist.component';
-
 export const routes: Routes = [
     {
-        path : "",
-        loadComponent : () => { return import('./Pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)}
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
     },
     {
-        path : "product-details",
+        path: 'home',
+        loadComponent: () => { return import('./Pages/dashboard/dashboard.component').then(m => m.DashboardComponent) }
+      },{
+        path: 'dashboard',
+        loadComponent: () => { return import('./Pages/admin-dashborad/admin-dashborad.component').then(m => m.AdminDashboradComponent) }
+      },
+    {
+        path : "products/:id",
         loadComponent :  () => { return import('./Pages/product-detail/product-detail.component').then(m=>m.ProductDetailComponent)}
     },
     {
@@ -38,8 +38,10 @@ export const routes: Routes = [
     },
     {
         path : "user-profile",
-        loadComponent  :()=> { return import('./Components/user-profile/user-profile.component').then(m=>m.UserProfileComponent)},
-        data: { isAdmin: true }
-
-    }
+        loadComponent  :()=> { return import('./Components/user-profile/user-profile.component').then(m=>m.UserProfileComponent)}
+    },
+    {
+        path: '**',
+        redirectTo: 'home'
+   }
 ];

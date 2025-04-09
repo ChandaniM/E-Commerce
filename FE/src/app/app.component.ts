@@ -8,16 +8,17 @@ import { ToastComponent } from './Components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet , NavbarComponent , FooterComponent , AdminDashboradComponent , ToastComponent],
+  imports: [RouterOutlet , NavbarComponent , FooterComponent  , ToastComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
   title = 'FE';
   themeMode : string = ""
-  isAdmin : boolean = true;
+  isAdmin : boolean = false;
 
   ngOnInit(): void {
+    this.isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
     this.themeMode  = environment.themeMode 
   }
 }

@@ -15,6 +15,7 @@ import { state } from '@angular/animations';
 export class RegisterComponent {
   userForm !: FormGroup;
   isHidden : boolean  = false;
+  roles = ['customer' , 'admin']
   constructor(private fb: FormBuilder , private router: Router) {}
 
   ngOnInit(): void {
@@ -34,8 +35,10 @@ export class RegisterComponent {
   }
 
   onSubmit() {
+    debugger
     if (this.userForm.valid) {
       console.log(this.userForm.value);
+      localStorage.setItem('user', JSON.stringify(this.userForm.value));
       this.router.navigate(['/login'])
     }
   }

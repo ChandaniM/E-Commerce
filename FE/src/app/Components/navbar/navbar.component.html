@@ -9,10 +9,26 @@
         <i class="bi bi-search"></i>
       </button>
     </div>
-    <div>
-      <i class="bi bi-heart fs-4 m-3"></i>
-      <i (click)="cart.toggleCart()" class="bi bi-cart2 fs-4 m-3"></i>
-      <i class="bi bi-person fs-3 m-3"></i>
+    <div class="right-element">
+      <!-- <i class="bi bi-heart fs-4 m-3"></i> -->
+      <div style="position: relative;">
+        <span class="count">{{cartElementCount}}</span>
+        <i (click)="cart.toggleCart()" class="bi bi-cart2 fs-4 m-3"></i>
+      </div>
+      <span class="parentDropdow">
+        <i (click)="toggleDropdown()"class="bi bi-person fs-3 m-3"></i>
+        @if(isDropdownOpen){
+          <div class="childdropdown">
+            @if(isLoggedIn){
+              <p (click)="logout()">Logout</p>
+            }
+            @else{
+              <p (click)="login()">Login</p>
+            }
+            <p (click)="openUserProfile()">Profile</p>
+          </div>
+        }
+      </span>
     </div>
   </div>
 </nav>

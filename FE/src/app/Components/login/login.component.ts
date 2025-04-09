@@ -4,6 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import { UsersService } from '../../Services/users.service';
+import { Helper } from '../../helpers/helper';
 
 @Component({
   selector: 'app-login',
@@ -15,21 +17,9 @@ export class LoginComponent {
   loginForm: FormGroup;
   hidePassword = true;
 
-  constructor(private fb: FormBuilder,private router: Router) {
+  constructor(private fb: FormBuilder,private route: Router , private loginService : UsersService , private helper : Helper) {
     this.loginForm = this.fb.group({
-      _username: ['', [Validators.required, Validators.minLength(3)]],
-      get username_1() {
-        return this._username;
-      },
-      set username_1(value) {
-        this._username = value;
-      },
-      get username() {
-        return this._username;
-      },
-      set username(value) {
-        this._username = value;
-      },
+      username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -39,11 +29,35 @@ export class LoginComponent {
   }
   onSubmit(){
     if(this.loginForm.valid){
-      console.log(this.loginForm.value)
+      let loginCred = {
+        username: this.loginForm.value.username.trim(),
+        password:this.loginForm.value.password.trim()
+      }
+      this.loginService.login(this.loginForm.value).subscribe({
+        next: (response: any) => {
+          if (response.type === 'success') {
+            localStorage.setItem("isLogin" , JSON.stringify(true));
+            const isAdmin = response.user.some((user: any) => user.role === 'admin');
+            localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+            if(isAdmin){
+              this.route.navigate(['/dashboard'])
+            }else{
+              this.route.navigate(['/home']);
+            }
+            this.helper.showMessage(response.message, "success");
+          }
+        },
+        error: (err) => {
+          console.error("API Error:", err);
+          const errorMessage = err?.error?.message || "Something went wrong. Please try again later.";
+          this.helper.showMessage(errorMessage, "error");
+        }
+      });
+      
     }
   }
 
   goToSignUp(){
-    this.router.navigate(['/register']);
+    this.route.navigate(['/register']);
   }
 }

@@ -14,7 +14,7 @@ export const API_ENDPOINTS = {
       DELETE: (id: number) => `/api/products/${id}`
     },
     AUTH: {
-      LOGIN: '/api/auth/login',
+      LOGIN: 'login',
       REGISTER: '/api/auth/register',
       REFRESH_TOKEN: '/api/auth/refresh'
     },
