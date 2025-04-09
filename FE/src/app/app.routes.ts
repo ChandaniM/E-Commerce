@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+    {
         path: 'home',
         loadComponent: () => { return import('./Pages/dashboard/dashboard.component').then(m => m.DashboardComponent) }
       },{
@@ -34,5 +39,9 @@ export const routes: Routes = [
     {
         path : "user-profile",
         loadComponent  :()=> { return import('./Components/user-profile/user-profile.component').then(m=>m.UserProfileComponent)}
-    }
+    },
+    {
+        path: '**',
+        redirectTo: 'home'
+   }
 ];
