@@ -35,9 +35,7 @@ const addProduct = async (req, res) => {
 const addToWishlist = async (req, res) => {
   try {
     let data = req.body;
-    console.log(data, "this is for addToWishlistController");
     let response = await productService.addToWishlist(data);
-    console.log(response, "this is wishlist resposne ");
     res.status(200).send(response);
   } catch (error) {
     res.status(500).send(error);
@@ -48,9 +46,7 @@ const addToWishlist = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const id = req.params["id"];
-    console.log(id);
     const response = await productService.getProductById(id);
-    console.log(response, "response from service getProductById");
     res.status(200).send(response);
   } catch (error) {
     res.status(500).send(error);
@@ -89,10 +85,7 @@ const getProductsByCategory = (req, res) => {
 const addProductReview = async (req, res) => {
   const reviewId = req.params["productId"];
   const reviewData = req.body;
-  console.log(reviewData, reviewId);
-
   const response = await productService.addProductReview(reviewId, reviewData);
-  console.log(response, "this is for testing");
   res.status(200).send(response);
 };
 
@@ -122,7 +115,6 @@ const getAllCategory = async (req, res) => {
 };
 
 const addNewCategory = async (req, res) => {
-  console.log("WELCOME TO CONTROLLER");
   let data = req.body;
   try {
     let response = await productService.addCategoryServices(data);
