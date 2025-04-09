@@ -29,15 +29,22 @@ export class LoginComponent {
   }
   onSubmit(){
     if(this.loginForm.valid){
-      console.log(this.loginForm.value)
+      let loginCred = {
+        username: this.loginForm.value.username.trim(),
+        password:this.loginForm.value.password.trim()
+      }
       this.loginService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
           if (response.type === 'success') {
+            localStorage.setItem("isLogin" , JSON.stringify(true));
             const isAdmin = response.user.some((user: any) => user.role === 'admin');
             localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+            if(isAdmin){
+              this.route.navigate(['/dashboard'])
+            }else{
+              this.route.navigate(['/home']);
+            }
             this.helper.showMessage(response.message, "success");
-            localStorage.setItem("isLogin" , JSON.stringify(true));
-            this.route.navigate(['']);
           }
         },
         error: (err) => {

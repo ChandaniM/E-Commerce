@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
-const isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
-const isLogin = JSON.parse(localStorage.getItem('isLogin') || "false");
 export const routes: Routes = [
     {
-        path : "",
-        loadComponent : () => { return !isAdmin  ?  import('./Pages/dashboard/dashboard.component').then(m=>m.DashboardComponent) : import('./Pages/admin-dashborad/admin-dashborad.component').then(m=>m.AdminDashboradComponent)}
-    },
+        path: 'home',
+        loadComponent: () => { return import('./Pages/dashboard/dashboard.component').then(m => m.DashboardComponent) }
+      },{
+        path: 'dashboard',
+        loadComponent: () => { return import('./Pages/admin-dashborad/admin-dashborad.component').then(m => m.AdminDashboradComponent) }
+      },
     {
         path : "products/:id",
         loadComponent :  () => { return import('./Pages/product-detail/product-detail.component').then(m=>m.ProductDetailComponent)}
