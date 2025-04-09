@@ -244,52 +244,6 @@ const getAllCategoryService = () => {
 };
 const addProductReview = (id, data) => {};
 
-// const addCategoryServices = (data) => {
-//   return new Promise((resolve, reject) => {
-//     const {
-//       main_category_name,
-//       name,
-//       slug,
-//       description,
-//       tags,
-//       is_active,
-//       image,
-//     } = data;
-
-//     const isActive = is_active ? 1 : 0;
-
-//     console.log(
-//       main_category_name,
-//       name,
-//       slug,
-//       description,
-//       tags,
-//       isActive,
-//       image
-//     );
-
-//     connection.query(
-//       query.addNewCategory,
-//       [main_category_name, name, slug, description, tags, isActive, image],
-//       (err, results) => {
-//         if (err) {
-//           return reject({
-//             type: "fail",
-//             message: "Failed to add category. Please try again later.",
-//             response: err,
-//           });
-//         }
-//         resolve({
-//           type: "success",
-//           message: "Category added successfully!",
-//           response: results,
-//           error: null,
-//         });
-//       }
-//     );
-//   });
-// };
-
 const addCategoryServices = async (data) => {
   try {
     const {
@@ -301,8 +255,6 @@ const addCategoryServices = async (data) => {
       is_active,
       image,
     } = data;
-
-    // Convert boolean/string to integer (1 or 0)
     const isActive = is_active ? 1 : 0;
 
     const results = await executeQuery(query.addNewCategory, [
@@ -322,8 +274,6 @@ const addCategoryServices = async (data) => {
     };
   } catch (err) {
     let errorMessage = "Failed to add category. Please try again later.";
-
-    // Handle specific SQL errors
     if (err.code === "ER_DUP_ENTRY") {
       errorMessage = "Category already exists. Please use a different name.";
     } else if (err.code === "ER_BAD_NULL_ERROR") {
@@ -359,7 +309,6 @@ const deleteCategoryServices = async (id) => {
 };
 
 const executeQuery = async (sql, params) => {
-  // backfilling
   return new Promise((resolve, reject) => {
     connection.query(sql, params, (err, results) => {
       if (err) {
@@ -369,7 +318,6 @@ const executeQuery = async (sql, params) => {
       }
     });
   });
-  // await connection.query(sql, params);
 };
 
 module.exports = {

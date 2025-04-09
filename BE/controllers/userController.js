@@ -13,12 +13,11 @@ const signup = async (req, res) => {
     });
   }
 };
-// login krlu
+
 const login = async (req, res) => {
   try {
     let username = req.body.username;
     let password = req.body.password;
-    console.log(username, password);
     let response = await userService.loginUser(username, password);
     res.status(200).send(response);
   } catch (error) {
@@ -33,7 +32,6 @@ const login = async (req, res) => {
 const deleteUserAccountController = async (req, res) => {
   try {
     let data = req.params["id"];
-    console.log(req.params["id"]);
     let response = await userService.deleteUserAccount(data);
     res.status(200).send(response);
   } catch (error) {
@@ -44,9 +42,7 @@ const deleteUserAccountController = async (req, res) => {
 const addNewUserController = async (req, res) => {
   try {
     let request = req.body;
-    console.log(request, "addNewUserController");
     let response = await userService.addNewUserService(request);
-    console.log(response, "from services");
     res.status(200).send(response);
   } catch (error) {
     res.status(500).send(error);
@@ -55,7 +51,6 @@ const addNewUserController = async (req, res) => {
 const updateUserdetailsController = async (req, res) => {
   try {
     let data = req.params["id"];
-    console.log(req.params["id"]);
     let response = await userService.deleteUserAccount(data);
     res.status(200).send(response);
   } catch (error) {
@@ -66,13 +61,9 @@ const updateUserdetailsController = async (req, res) => {
 const getProfile = async (req, res, next) => {
   try {
     let id = req.body["id"];
-    console.log("User ID:", id);
-
     let userResponse = await userService.getProfile(id);
-
     res.status(200).send(userResponse);
   } catch (error) {
-    console.log("Error:", error);
     res.status(500).send(error.message || "Internal Server Error");
   }
 };
@@ -81,11 +72,9 @@ const updateUserProfile = async (req, res) => {
   try {
     let data = req.body;
     let id = req.params["id"];
-    console.log(data, "USER DATA : ");
     let userResponse = await userService.updateUserProfile(id, data);
     res.status(200).send(userResponse);
   } catch (error) {
-    console.log("Error:", error);
     res.status(500).send(error.message || "Internal Server Error");
   }
 };
